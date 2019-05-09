@@ -208,10 +208,10 @@ app.post('/resetpassword', async (req, res)=>{
 
   
 
-mongoose.connect('mongodb://localhost:27017/mechy',(err)=>{
+mongoose.connect('mongodb://localhost:27017/supreme',(err)=>{
     if(!err){
         console.log('Connected to mongo Database');
     }
 })
 
-app.listen(80);
+app.listen(8083);
