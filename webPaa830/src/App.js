@@ -248,13 +248,12 @@ let today = moment(new Date()).format('DD-MM-YYYY');
                     <Row>
                         <Col xs={12}>
                             <img src="/logoprint.png"/>
-                            <h5>"Novara Beauty Salon - Spa "</h5>
-                            <h5>Ubicado en la calle 12 de Julio esq. Gral Roman</h5>
-                            <h5>Tel.: 809-535-5500</h5>
+                            <h5>Supreme - Lavanderia </h5>
+                            <h5>Ubicado en la calle 12 de Julio esq. Av. Romulo Betancourt</h5>
+                            <h5>Tel.: 829-594-8430</h5>
                             <br/>
                             <br/>
-                            <h5 className="col-xs-offset-7">Fecha:
-{today}</h5>
+                            <h5 className="col-xs-offset-7">Fecha: {today}</h5>
                             <br/>
                         </Col>
                     </Row>
@@ -437,6 +436,7 @@ class Toolbar extends React.Component{
     }
 
     onRefreshed(){
+        this.props.history.push("/detail")
         window.location.reload();
     }
 
@@ -458,7 +458,7 @@ class Toolbar extends React.Component{
                             <MenuItem eventKey={3.2}><Link to="/bipartials">Resume Cuadre por Tipo de Servicio</Link></MenuItem>
                             <MenuItem eventKey={3.3}><Link to="/tripartials">Resumen Cuadre General</Link></MenuItem>
                             <MenuItem divider />
-                            <MenuItem eventKey={3.4}><Link to="/agregar_peluquera">Agregar Tipo de Servicio</Link></MenuItem>
+                            <MenuItem eventKey={3.4}><Link to="/agregar_tiposervicio">Agregar Tipo de Servicio</Link></MenuItem>
                       </NavDropdown>
                       <NavDropdown style={{'float':'right','position':'absolute','left':'80%'}} eventKey={3} title="Perfil Usuario" id="basic-nav-dropdown">
                             <MenuItem eventKey={3.1}><Link to="/account">Cuenta de Usuario</Link></MenuItem>
@@ -1099,59 +1099,59 @@ masterCallback={this.props.masterCallback}
 
 const languages = [
   {
-    name: 'LAVADO',
+    name: 'TRAJES 2 PIEZAS',
     year: 1972
   },
   {
-    name: 'PELO CORTO',
+    name: 'SACOS',
     year: 2000
   },
   {
-    name: 'PELO LARGO',
+    name: 'PANTALONES',
     year: 1983
   },
   {
-    name: 'EXTENSIONES',
+    name: 'CAMISAS',
     year: 2007
   },
   {
-    name: 'LAVADO CON LINEA',
+    name: 'POLO SHIRT',
     year: 2012
   },
   {
-    name: 'TRATAMIENTO PROFUNDO',
+    name: 'CHACABANA',
     year: 2009
   },
   {
-    name: 'CELOFEN',
+    name: 'VESTIDO DAMAS',
     year: 1990
   },
   {
-    name: 'CEJAS',
+    name: 'FALDAS',
     year: 1995
   },
   {
-    name: 'POSTURAS DE UNAS',
+    name: 'BLUSAS',
     year: 1995
   },
   {
-    name: 'PINTADAS',
+    name: 'CORTINAS',
     year: 1987
   },
   {
-    name: 'MANOS Y PIES',
+    name: 'COLCHAS',
     year: 1995
   },
   {
-    name: 'KERATINA',
+    name: 'FRANELA',
     year: 1991
   },
   {
-    name: 'Ruby',
+    name: 'ABRIGO',
     year: 1995
   },
   {
-    name: 'ALIZADO',
+    name: 'OVERALL',
     year: 2003
   }
 ];
@@ -2975,7 +2975,7 @@ ReactDOM.render((
   <Router history={browserHistory}>
     <Route path="/" component={App}>
         <Route path="account" component={Account}/>
-        <Route path="agregar_peluquera" component={AgregarPeluquera}/>
+        <Route path="agregar_tiposervicio" component={AgregarPeluquera}/>
         <Route path="tripartials" component={TriPartials}/>
     	<Route path="bipartials" component={BiPartials}/>
         <Route path="partials" component={Partials}/>
