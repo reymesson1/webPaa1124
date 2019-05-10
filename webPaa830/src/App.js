@@ -455,10 +455,10 @@ class Toolbar extends React.Component{
                       <li><Link to={'/detail'}>Inventario</Link></li>
                       <NavDropdown eventKey={3} title="Reportes" id="basic-nav-dropdown">
                             <MenuItem eventKey={3.1}><Link to="/partials">Cuadre</Link></MenuItem>
-                            <MenuItem eventKey={3.2}><Link to="/bipartials">Resume Cuadre por Peluquera</Link></MenuItem>
+                            <MenuItem eventKey={3.2}><Link to="/bipartials">Resume Cuadre por Tipo de Servicio</Link></MenuItem>
                             <MenuItem eventKey={3.3}><Link to="/tripartials">Resumen Cuadre General</Link></MenuItem>
                             <MenuItem divider />
-                            <MenuItem eventKey={3.4}><Link to="/agregar_peluquera">Agregar Peluquera</Link></MenuItem>
+                            <MenuItem eventKey={3.4}><Link to="/agregar_peluquera">Agregar Tipo de Servicio</Link></MenuItem>
                       </NavDropdown>
                       <NavDropdown style={{'float':'right','position':'absolute','left':'80%'}} eventKey={3} title="Perfil Usuario" id="basic-nav-dropdown">
                             <MenuItem eventKey={3.1}><Link to="/account">Cuenta de Usuario</Link></MenuItem>
@@ -1373,10 +1373,10 @@ getSuggestionValue={getSuggestionValue}
                         <Row>
                             <FormGroup controlId="formControlsSelect">
                                 <Col md={1} sm={2}>
-                                  <ControlLabel>Peluquera</ControlLabel>
+                                  <ControlLabel>Tipo de Servicio</ControlLabel>
                                 </Col>
                                 <Col md={4} sm={6}>
-                                  <FormControl componentClass="select" name="development" placeholder="Peluquera" required >
+                                  <FormControl componentClass="select" name="development" placeholder="Tipo de Servicio" required >
                                     {this.state.peluqueraData.sort((a,b)=>a.name>b.name).map(
                                         item => <option value={item.name}>{item.name}</option>                                    
                                     )}
@@ -1450,7 +1450,7 @@ class MasterModalTable extends React.Component{
                 <th>#</th>
                 <th>Nombre</th>
                 <th>Articulo</th>
-                <th>Peluquera</th>
+                <th>Tipo de Servicio</th>
                 <th>Precio</th>
               </tr>
         );
