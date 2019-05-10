@@ -2585,7 +2585,7 @@ class BiPartials extends React.Component{
                   <tr>
                     <th>#</th>
                     <th>Fecha</th>
-                    <th>Peluquera</th>
+                    <th>Tipo de Servicio</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -2752,7 +2752,7 @@ class AgregarPeluquera extends React.Component{
                 </Row>
             <Row>
             <div className="pull-right">
-                <Button onClick={this.open.bind(this)}>Agregar Peluquera</Button>
+                <Button onClick={this.open.bind(this)}>Agregar Tipo de Servicio</Button>
                 <PeluqueraModal showModal={this.state.showModal}
                                             peluqueraCallback={{
                                                 open:this.open,
@@ -2805,7 +2805,7 @@ class PeluqueraTable extends React.Component{
         );
 
         return(
-            <Panel header="Listado de peluquera">
+            <Panel header="Listado de Tipo de Servicio">
                 <Table striped bordered condensed hover>
                     <thead>
                     <tr>
@@ -2855,7 +2855,7 @@ class PeluqueraModal extends React.Component{
         return(
             <Modal show={this.props.showModal} onHide={this.props.peluqueraCallback.close}>
             <Modal.Header closeButton>
-              <Modal.Title>Agregar Peluquera</Modal.Title>
+              <Modal.Title>Agregar Tipo de Servicio</Modal.Title>
             </Modal.Header>
             <Form horizontal onSubmit={this.props.peluqueraCallback.onsavepeluquera.bind(this)}>
                 <Modal.Body>
