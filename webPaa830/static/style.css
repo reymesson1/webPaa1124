@@ -822,11 +822,14 @@ body {
   font-family: Helvetica, sans-serif;
 }
 
-printcss{
+@media print {
 
-    border:1px solid #000;
-    padding:0.5em;
-    
+    #printcss{
+  
+      border:1px solid #000;
+      padding:0.5em;
+  
+    }  
 }
 
 .print-cut {page-break-after: always;}
