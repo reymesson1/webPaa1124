@@ -21,7 +21,5 @@ exports.setMaster = async(req,res)=>{
       }
     })
     
-    master.push(req.body);
-    
     res.send(req.body);
 }
