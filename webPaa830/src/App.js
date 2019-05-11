@@ -243,7 +243,7 @@ let today = moment(new Date()).format('DD-MM-YYYY');
 
         return(
 
-            <div  id="printcss print-cut" style={{'margin':'0'}}>
+            <div  id="printcss " style={{'margin':'0'}}>
                 <Grid>
                     <Row>
                         <Col xs={12}>
@@ -262,18 +262,13 @@ let today = moment(new Date()).format('DD-MM-YYYY');
                     </Row>
                     <Row>
                         <Col xs={12}>
-                            <Table striped bordered condensed hover
-style={{'position':'relative','width':'55%', 'margin':'0'}}>
+                            <Table striped bordered condensed hover>
                                 <thead>
                                   <tr>
-                                    <th style={{'width':'15px',
-'font-size':'25px', 'border-spacing':'0 30px'}}>#</th>
-                                    <th style={{'width':'15px',
-'font-size':'25px'}}>Articulo</th>
-                                    <th style={{'width':'15px',
-'font-size':'25px'}}>Precio</th>
-                                    <th style={{'width':'15px',
-'font-size':'25px'}}>Servicio</th>
+                                    <th>#</th>
+                                    <th>Articulo</th>
+                                    <th style={{'width':'15px','font-size':'25px'}}>Precio</th>
+                                    <th style={{'width':'15px','font-size':'25px'}}>Servicio</th>
                                   </tr>
                                 </thead>
                                     {this.props.masterAPI.map(
