@@ -262,16 +262,31 @@ let today = moment(new Date()).format('DD-MM-YYYY');
                     </Row>
                     <Row>
                         <Col xs={12}>
-                            <Table striped bordered condensed hover>
+                            <Table striped bordered condensed hover
+style={{'position':'relative','width':'55%', 'margin':'0'}}>
                                 <thead>
                                   <tr>
-                                    <th>#</th>
-                                    <th>Articulo</th>
-                                    <th style={{'width':'15px','font-size':'25px'}}>Precio</th>
-                                    <th style={{'width':'15px','font-size':'25px'}}>Servicio</th>
+                                    <th style={{'width':'15px',
+'font-size':'25px', 'border-spacing':'0 30px'}}>#</th>
+                                    <th style={{'width':'15px',
+'font-size':'25px'}}>Articulo</th>
+                                    <th style={{'width':'15px',
+'font-size':'25px'}}>Precio</th>
+                                    <th style={{'width':'15px',
+'font-size':'25px'}}>Servicio</th>
                                   </tr>
                                 </thead>
-                                    {this.props.masterAPI.map(
+                                <Row style={{'border':'1px solid black'}}>
+                                    <Col xs={2}>
+                                        {this.props.masterAPI.map(
+                                            (master, index) => 
+                                            <Row>
+                                                <h5>{master.id}</h5>
+                                            </Row>
+                                        )}
+                                    </Col>
+                                </Row>
+                                    {/* {this.props.masterAPI.map(
                                         (master,index) => <ActionsTableBody
                                                                  key={index}
                                                                  index={index}
@@ -279,7 +294,7 @@ let today = moment(new Date()).format('DD-MM-YYYY');
 
 item={master.item}
                                                           />
-                                    )}
+                                    )} */}
                                 <tfoot>
                                     <ActionsTableBodyFooter
                                                  parameter =
