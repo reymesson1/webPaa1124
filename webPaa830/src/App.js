@@ -247,8 +247,8 @@ let today = moment(new Date()).format('DD-MM-YYYY');
                 <Grid>
                     <Row>
                         <Col xs={12}>
-                            {/* <img src="/logoprint.png"/> */}
-                            <h1>Supreme - Lavanderia </h1>
+                            <img src="/logoprint.png"/>
+                            <h5>Supreme - Lavanderia </h5>
                             <h5>Ubicado en la calle 12 de Julio esq. Av. Romulo Betancourt</h5>
                             <h5>Tel.: 829-594-8430</h5>
                             <br/>
