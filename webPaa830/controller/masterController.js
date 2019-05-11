@@ -10,3 +10,18 @@ exports.getMaster = async(req,res)=>{
   
   res.send(master);
 }
+
+exports.setMaster = async(req,res)=>{
+  
+    var master = new Master(req.body);
+    
+    master.save(function(err){
+      if(!err){
+        console.log('Master saved');
+      }
+    })
+    
+    master.push(req.body);
+    
+    res.send(req.body);
+}

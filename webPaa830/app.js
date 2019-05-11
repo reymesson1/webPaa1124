@@ -35,11 +35,13 @@ app.post('/cookies', function(req,res){
 
 app.get('/master', masterController.getMaster)
 
-app.post('/master', function(req,res){
+// app.post('/master', function(req,res){
 
-    dba.addMaster(req.body);
-    master.push(req.body);
-});
+//     dba.addMaster(req.body);
+//     master.push(req.body);
+// });
+
+app.post('/master', masterController.setMaster);
 
 app.post('/deletemaster', function(req,res){
 
