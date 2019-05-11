@@ -276,17 +276,7 @@ style={{'position':'relative','width':'55%', 'margin':'0'}}>
 'font-size':'25px'}}>Servicio</th>
                                   </tr>
                                 </thead>
-                                <Row style={{'border':'1px solid black'}}>
-                                    <Col xs={2}>
-                                        {this.props.masterAPI.map(
-                                            (master, index) => 
-                                            <Row>
-                                                <h5>{master.id}</h5>
-                                            </Row>
-                                        )}
-                                    </Col>
-                                </Row>
-                                    {/* {this.props.masterAPI.map(
+                                    {this.props.masterAPI.map(
                                         (master,index) => <ActionsTableBody
                                                                  key={index}
                                                                  index={index}
@@ -294,7 +284,7 @@ style={{'position':'relative','width':'55%', 'margin':'0'}}>
 
 item={master.item}
                                                           />
-                                    )} */}
+                                    )}
                                 <tfoot>
                                     <ActionsTableBodyFooter
                                                  parameter =
