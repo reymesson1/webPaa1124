@@ -30,8 +30,8 @@ const Autosuggest = Autosuggest;
 
 const moment = moment;
 
-// const API_URL = 'http://localhost:8083'; 
-const API_URL = 'http://159.203.156.208:8083';
+const API_URL = 'http://localhost:8083'; 
+// const API_URL = 'http://159.203.156.208:8083';
 
 const API_HEADERS = {
 
@@ -248,11 +248,14 @@ let today = moment(new Date()).format('DD-MM-YYYY');
                     <Row>
                         <Col xs={12}>
                             {/* <img src="/logoprint.png"/> */}
-                            <h1>Supreme - Lavanderia </h1>
-                            <h5>Ubicado en la calle 12 de Julio esq. Av. Romulo Betancourt -</h5>
-                            <h5>Tel.: 829-594-8430</h5>
-                            <br/>
-                            <br/>
+                            <h3>Orden de Servicio </h3>
+                            <h4>Supreme - Lavanderia </h4>
+                            <h5>Av. Romulo Betancourt No. 1516 esq. 12 de Julio</h5>
+                            <h5>Plaza Thalys, Bella Vista, Sto. Dgo.</h5>
+                            <h4>Tel.: 829-594-8430</h4>
+                            <h5>Horario Lunes a Viernes 07:30am a 7:00pm</h5>
+                            <h5>Sabado 08:30am a 5:00pm</h5>
+                            <h5>RNC: 131576958</h5>
                             <h5 className="col-xs-offset-7">Fecha: {today}</h5>
                             <br/>
                         </Col>
@@ -270,7 +273,7 @@ style={{'position':'relative','width':'55%', 'margin':'0'}}>
                                     <th style={{'width':'15px',
 'font-size':'25px'}}>Precio</th>
                                     <th style={{'width':'15px',
-'font-size':'25px'}}>Peluquera</th>
+'font-size':'25px'}}>Servicio</th>
                                   </tr>
                                 </thead>
                                     {this.props.masterAPI.map(
