@@ -9,6 +9,8 @@ var dba = require('./lib/dba-helper.js')();
 app.use(bodyParser.json());
 var cookies = false;
 var User = require('./models/user.js');
+var masterController = require('./controller/masterController');
+
 app.get('/cookies', function(req,res){
 
     res.send(cookies);
@@ -24,12 +26,14 @@ app.post('/cookies', function(req,res){
     }
 });
 
-var master = [];
+// var master = [];
 
-app.get('/master', function(req,res){
+// app.get('/master', function(req,res){
 
-    res.send(master);
-})
+//     res.send(master);
+// })
+
+app.get('/master', masterController.getMaster)
 
 app.post('/master', function(req,res){
 
