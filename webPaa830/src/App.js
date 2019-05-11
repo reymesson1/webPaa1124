@@ -243,7 +243,7 @@ let today = moment(new Date()).format('DD-MM-YYYY');
 
         return(
 
-            <div  id="printcss" style={{'margin':'0'}}>
+            <div  id="printcss print-cut" style={{'margin':'0'}}>
                 <Grid>
                     <Row>
                         <Col xs={12}>
