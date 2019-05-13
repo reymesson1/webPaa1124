@@ -477,7 +477,7 @@ class Toolbar extends React.Component{
                     <div className="navbar-header">
                         <div className="navbar-brand">
                             <Link to={'/'}
-onClick={this.onClicked.bind(this)}>React-Bootstrap</Link>
+onClick={this.onRefreshed.bind(this)}>React-Bootstrap</Link>
                         </div>
                     </div>
                     <Nav>
@@ -650,7 +650,8 @@ let today = moment(new Date()).format('YYYY-MM-DD');
             "firstname":event.target.firstname.value,
             "item":event.target.suggest.value,
             "development":event.target.development.value,
-            "project":event.target.project.value,
+            "project":(parseInt(event.target.project.value)*parseInt(event.target.quantity.value) ).toString()
+            
         }
 
         nextState.push(newItem);
@@ -1156,6 +1157,14 @@ const languages = [
   {
     name: 'OVERALL',
     year: 2003
+  },
+  {
+    name: 'SHORT',
+    year: 2003
+  },
+  {
+    name: 'VESTIDO DE NOVIA',
+    year: 2003
   }
 ];
 
@@ -1313,20 +1322,30 @@ name="development" placeholder="List" required >
                                 Project
                               </Col>
                               <Col md={4} sm={6}>
-                                <FormControl type="text"
-name="project" placeholder="Project" required />
+                                <FormControl type="text" name="project" placeholder="Project" required />
                               </Col>
                               <Col md={2} sm={2} >
-                                    <Button type="submit"><i
-className="fa fa-plus" aria-hidden="true"></i></Button>
+                                    <Button type="submit"><i className="fa fa-plus" aria-hidden="true"></i></Button>
                               </Col>
                             </FormGroup>
                         </Row>
                         <br/>
                         <Row>
-                            <input
-style={{'width':'70px','display':'none'}} type="text" name="suggest"
-placeholder="Name" value={this.state.value} />
+                            <FormGroup controlId="formHorizontalName">
+                              <Col componentClass={ControlLabel} md={1} sm={2}>
+                                Cantidad
+                              </Col>
+                              <Col md={4} sm={6}>
+                                <FormControl type="text" name="quantity" placeholder="Cantidad" required />
+                              </Col>
+                              <Col md={2} sm={2} >
+                                    <Button type="submit"><i className="fa fa-plus" aria-hidden="true"></i></Button>
+                              </Col>
+                            </FormGroup>
+                        </Row>
+                        <br/>
+                        <Row>
+                            <input style={{'width':'70px','display':'none'}} type="text" name="suggest" placeholder="Name" value={this.state.value} />
                         </Row>
                     </Form>
 
@@ -1394,16 +1413,25 @@ getSuggestionValue={getSuggestionValue}
                                 Precio
                               </Col>
                               <Col md={4} sm={6}>
-                                <FormControl type="text"
-name="project" placeholder="Precio" required />
-                              </Col>
-                              <Col md={2} sm={2} >
-                                    <Button type="submit"><i
-className="fa fa-plus" aria-hidden="true"></i></Button>
-                              </Col>
+                                <FormControl type="text" name="project" placeholder="Precio" required />
+                              </Col>                              
                             </FormGroup>
                         </Row>
                         <br/>
+                        <Row>
+                            <FormGroup controlId="formHorizontalName">
+                              <Col componentClass={ControlLabel} md={1} sm={2}>
+                                Cantidad
+                              </Col>
+                              <Col md={4} sm={6}>
+                                <FormControl type="text" name="quantity" placeholder="Cantidad" required />
+                              </Col>
+                              <Col md={2} sm={2} >
+                                    <Button type="submit"><i className="fa fa-plus" aria-hidden="true"></i></Button>
+                              </Col>
+                            </FormGroup>
+                        </Row>
+                        <br/>                        
                         <Row>
                             <input
 style={{'width':'70px','display':'none'}} type="text" name="suggest"
