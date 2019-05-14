@@ -23,3 +23,29 @@ exports.setMaster = async(req,res)=>{
     
     res.send(req.body);
 }
+
+exports.updateMaster = async(req,res)=>{
+
+  var master = await Master.findOne({"id":req.body.id},function(err,m){
+
+      if(!err){
+          
+          m.payment=req.body.payment
+          m.status="pagada"
+          m.save(function(err, s){
+              console.log('Payment Updated');
+          })
+      }
+  })
+
+  res.send(req.body);
+
+}
+
+exports.getMasterPartials = async(req,res)=>{
+
+  var master = await Master.find({})
+
+  res.send(master)
+
+}

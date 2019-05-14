@@ -26,22 +26,11 @@ app.post('/cookies', function(req,res){
     }
 });
 
-// var master = [];
-
-// app.get('/master', function(req,res){
-
-//     res.send(master);
-// })
-
 app.get('/master', masterController.getMaster)
 
-// app.post('/master', function(req,res){
-
-//     dba.addMaster(req.body);
-//     master.push(req.body);
-// });
-
 app.post('/master', masterController.setMaster);
+
+app.post('/payment', masterController.updateMaster);
 
 app.post('/deletemaster', function(req,res){
 
@@ -53,16 +42,7 @@ app.post('/deletemaster', function(req,res){
     master.splice(index,1);
 });
 
-
-
-app.get('/reporte', function(req,res){
-
-    dba.getMaster({}, function(data){
-
-        res.send(data);
-
-    });
-})
+app.get('/reporte', masterController.getMasterPartials)
 
 var detail = [];
 

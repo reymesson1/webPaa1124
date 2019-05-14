@@ -218,17 +218,75 @@ class Actions extends React.Component{
         window.location.href = '/';
     }
 
+    setPayment(event){
+
+        event.preventDefault();
+
+        let currentTarget = ''
+
+        if(event.target.card.value=="yes"){
+            currentTarget = "card"
+        }else{
+            currentTarget = "cash"
+        }
+
+        let newMaster = {
+            
+            "id": this.props.params.actionid,
+            "payment": currentTarget
+
+        }
+
+        fetch(API_URL+'/payment', {
+            
+                method: 'post',
+                headers: API_HEADERS,
+                body: JSON.stringify(newMaster)
+        })
+
+        window.location.href = '/';
+        
+        console.log(newMaster)
+
+    }
+
     render(){
 
         return(
             <div>
-                <ActionsTable
+                <form onSubmit={this.setPayment.bind(this)}>
+                <fieldset>
+                <Row>
+                    <Panel header="Please click the correct option">
+                        <Row>
+                        
+                            <Col xs={'6'}>
+                                <h3>Yes</h3>
+                                <input className="form-control" placeholder="Card" name="card" value="yes" type="radio"/>
+                            </Col>
+                            <Col xs={'6'}>
+                                <h3>No</h3>
+                                <input className="form-control" placeholder="Cash" name="cash" value="no" type="radio"/>
+                            </Col>
+                
+                        </Row>
+                        <Row>
+                            
+                        </Row>
+                    </Panel>
+                </Row>
+                <Row>
+                    <Button className="btn btn-default" type="submit" >Submit</Button>
+                </Row>
+                </fieldset>
+                </form>
+                {/* <ActionsTable
                                 parameter={this.state.parameter}
 
 masterAPI={this.state.masterAPI.filter((master)=> master.id
 ==this.state.parameter)}
                 />
-                <Button onClick={this.onPrinted.bind(this)} >i&nbsp;</Button>
+                <Button onClick={this.onPrinted.bind(this)} >i&nbsp;</Button> */}
             </div>
         );
     }
@@ -611,7 +669,8 @@ let today = moment(new Date()).format('YYYY-MM-DD');
             "name": name,
             "item": this.state.masterDetail,
             "project": zoom,
-            "status":"pending"
+            "status":"pending",
+            "payment": ""
 
         }
 
@@ -980,6 +1039,23 @@ masterCallback={this.props.masterCallback}
 
 class MasterTableBody extends React.Component{
 
+    onClick(){
+
+        fetch(API_URL+'/master',{headers: API_HEADERS})
+        .then((response)=>response.json())
+        .then((responseData)=>{
+            this.setState({
+
+                masterAPI: responseData
+            })
+        })
+        .catch((error)=>{
+            console.log('Error fetching and parsing data', error);
+        })
+
+        console.log('clicked!');
+    } 
+
     render(){
 
         return(
@@ -990,11 +1066,10 @@ class MasterTableBody extends React.Component{
                     <td>{this.props.items}</td>
                     <td>{this.props.status}</td>
                     <td>
-                        <Link className="btn btn-default"
-to={'/actions/'+this.props.id}><i className="fa fa-eye"
-aria-hidden="true"></i></Link>{' '}
-<Button onClick={this.props.masterCallback.ondeletemaster.bind(this,this.props.id)}><i
-className="fa fa-trash" aria-hidden="true"></i></Button>
+                        {/* <Link className="btn btn-default" to={'/actions/'+this.props.id}><i className="fa fa-eye" aria-hidden="true"></i></Link>{' '} */}                                                
+    <a target="_blank" onClick={this.onClick} className="btn btn-default" href={"http://localhost:3000/"+this.props.id}><i className="fa fa-eye" aria-hidden="true"></i></a>{' '}
+                        <Link className="btn btn-default" to={'/actions/'+this.props.id}><i className="fa fa-dollar" aria-hidden="true"></i></Link>{' '}                                                
+                        <Button onClick={this.props.masterCallback.ondeletemaster.bind(this,this.props.id)}><i className="fa fa-trash" aria-hidden="true"></i></Button>
                     </td>
                   </tr>
         );
@@ -2280,7 +2355,7 @@ class Partials extends React.Component{
 
     onRun(){
 
-                let nextState = this.state.masterAPI.filter((master) => master.date == this.state.searchData);
+                let nextState = this.state.masterAPI.filter((master) => (master.date == this.state.searchData) && (master.payment =="cash"||master.payment=="card"));
 
                 let grand = 0;
 
@@ -2334,8 +2409,9 @@ class Partials extends React.Component{
                         />
                         <PartialsTable
 
-                            masterAPI={this.state.masterAPI.filter((master)=> master.date == this.state.searchData)}
+                            masterAPI={this.state.masterAPI.filter((master)=> master.date == this.state.searchData && (master.payment=="cash"||master.payment=="card") )}
                             total={this.state.total}
+                            payment={this.state.payment}
                         />
                     </Row>
                     <Row>
@@ -2398,8 +2474,8 @@ class PartialsTable extends React.Component{
 'border-spacing':'0 30px'}}>#</th>
                 <th style={{'width':'15px', 'font-size':'25px'}}>Fecha</th>
                 <th style={{'width':'15px', 'font-size':'25px'}}>Cliente</th>
-                <th style={{'width':'15px',
-'font-size':'25px'}}>Precio</th>
+                <th style={{'width':'15px', 'font-size':'25px'}}>Precio</th>
+                <th style={{'width':'15px', 'font-size':'25px'}}>Tipo Pago</th>
               </tr>
         );
 
@@ -2434,6 +2510,7 @@ style={{'width':'55%'}}>
                                                 name={master.name}
                                                 project={master.project}
                                                 total={this.props.total}
+                                                payment={master.payment}
                                     />
             )}
                                 </tbody>
@@ -2469,9 +2546,9 @@ class PartialsTableBody extends React.Component{
               <tr>
                 <td></td>
                 <td style={{'font-size':'20px'}}>{this.props.date}</td>
-                <td
-style={{'font-size':'20px'}}>{this.props.name}</td>
+                <td style={{'font-size':'20px'}}>{this.props.name}</td>
                 <td style={{'font-size':'20px'}}>{this.props.project}.00</td>
+                <td style={{'font-size':'20px'}}>{this.props.payment}</td>
               </tr>
         );
     }
