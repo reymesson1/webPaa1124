@@ -1067,7 +1067,7 @@ class MasterTableBody extends React.Component{
                     <td>{this.props.status}</td>
                     <td>
                         {/* <Link className="btn btn-default" to={'/actions/'+this.props.id}><i className="fa fa-eye" aria-hidden="true"></i></Link>{' '} */}                                                
-    <a target="_blank" onClick={this.onClick} className="btn btn-default" href={"http://localhost:3000/"+this.props.id}><i className="fa fa-eye" aria-hidden="true"></i></a>{' '}
+                        <a target="_blank" onClick={this.onClick} className="btn btn-default" href={"http://159.203.156.208:3000/"+this.props.id}><i className="fa fa-eye" aria-hidden="true"></i></a>{' '}
                         <Link className="btn btn-default" to={'/actions/'+this.props.id}><i className="fa fa-dollar" aria-hidden="true"></i></Link>{' '}                                                
                         <Button onClick={this.props.masterCallback.ondeletemaster.bind(this,this.props.id)}><i className="fa fa-trash" aria-hidden="true"></i></Button>
                     </td>
