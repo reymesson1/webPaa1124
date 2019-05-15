@@ -254,7 +254,7 @@ class Actions extends React.Component{
 
         return(
             <div>
-                <form onSubmit={this.setPayment.bind(this)}>
+                {/* <form onSubmit={this.setPayment.bind(this)}>
                 <fieldset>
                 <Row>
                     <Panel header="Please click the correct option">
@@ -279,14 +279,14 @@ class Actions extends React.Component{
                     <Button className="btn btn-default" type="submit" >Submit</Button>
                 </Row>
                 </fieldset>
-                </form>
-                {/* <ActionsTable
+                </form> */}
+                <ActionsTable
                                 parameter={this.state.parameter}
 
 masterAPI={this.state.masterAPI.filter((master)=> master.id
 ==this.state.parameter)}
                 />
-                <Button onClick={this.onPrinted.bind(this)} >i&nbsp;</Button> */}
+                <Button onClick={this.onPrinted.bind(this)} >i&nbsp;</Button>
             </div>
         );
     }
@@ -1066,8 +1066,8 @@ class MasterTableBody extends React.Component{
                     <td>{this.props.items}</td>
                     <td>{this.props.status}</td>
                     <td>
-                        {/* <Link className="btn btn-default" to={'/actions/'+this.props.id}><i className="fa fa-eye" aria-hidden="true"></i></Link>{' '} */}                                                
-                        <a target="_blank" onClick={this.onClick} className="btn btn-default" href={"http://159.203.156.208:3000/"+this.props.id}><i className="fa fa-eye" aria-hidden="true"></i></a>{' '}
+                        <Link className="btn btn-default" to={'/actions/'+this.props.id}><i className="fa fa-eye" aria-hidden="true"></i></Link>{' '}                                                
+                        {/* <a target="_blank" onClick={this.onClick} className="btn btn-default" href={"http://159.203.156.208:3000/"+this.props.id}><i className="fa fa-eye" aria-hidden="true"></i></a>{' '} */}
                         <Link className="btn btn-default" to={'/actions/'+this.props.id}><i className="fa fa-dollar" aria-hidden="true"></i></Link>{' '}                                                
                         <Button onClick={this.props.masterCallback.ondeletemaster.bind(this,this.props.id)}><i className="fa fa-trash" aria-hidden="true"></i></Button>
                     </td>
