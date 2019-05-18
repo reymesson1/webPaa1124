@@ -704,11 +704,13 @@ class Master extends React.Component{
         let nextState = this.state.masterDetail;
 
         let today = moment(new Date()).format('DD-MM-YYYY');
+        let fechaentrega = moment(new Date()).add(3, 'days').format('DD-MM-YYYY');
 
         let newItem = {
 
             "id": Date.now(),
             "date": today,
+            "fechaentrega": today,
             "firstname":event.target.firstname.value,
             "item":event.target.suggest.value,
             "development":event.target.development.value,
