@@ -650,7 +650,7 @@ class Master extends React.Component{
 
         event.preventDefault();
 
-let today = moment(new Date()).format('YYYY-MM-DD');
+        let today = moment(new Date()).format('YYYY-MM-DD');
 
         let details = this.state.masterDetail;
 
@@ -703,9 +703,12 @@ let today = moment(new Date()).format('YYYY-MM-DD');
 
         let nextState = this.state.masterDetail;
 
+        let today = moment(new Date()).format('DD-MM-YYYY');
+
         let newItem = {
 
             "id": Date.now(),
+            "date": today,
             "firstname":event.target.firstname.value,
             "item":event.target.suggest.value,
             "development":event.target.development.value,
