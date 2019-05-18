@@ -1019,7 +1019,7 @@ class MasterTable extends React.Component{
                           {MasterTableActive}
                         </thead>
                         <tbody>
-                        {filteredMaster.map(
+                        {filteredMaster.sort((a,b)=>b.id-a.id).map(
                             (master, index) => <MasterTableBody
                                                                 key={master.id}
                                                                 id={master.id}

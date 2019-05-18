@@ -1537,7 +1537,9 @@ var MasterTable = function (_React$Component14) {
                     React.createElement(
                         'tbody',
                         null,
-                        filteredMaster.map(function (master, index) {
+                        filteredMaster.sort(function (a, b) {
+                            return b.id - a.id;
+                        }).map(function (master, index) {
                             return React.createElement(MasterTableBody, {
                                 key: master.id,
                                 id: master.id,
