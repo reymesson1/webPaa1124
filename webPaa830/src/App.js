@@ -709,7 +709,7 @@ let today = moment(new Date()).format('YYYY-MM-DD');
             "firstname":event.target.firstname.value,
             "item":event.target.suggest.value,
             "development":event.target.development.value,
-            "project":(parseInt(event.target.project.value)*parseInt(event.target.quantity.value) ).toString()
+            "project":(parseInt(event.target.project.value)*parseInt(event.target.quantity.value) )
             
         }
 
