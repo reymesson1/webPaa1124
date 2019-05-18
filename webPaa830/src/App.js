@@ -713,6 +713,7 @@ class Master extends React.Component{
             "fechaentrega": fechaentrega,
             "firstname":event.target.firstname.value,
             "item":event.target.suggest.value,
+            "quantity":event.target.quantity.value,
             "development":event.target.development.value,
             "project":(parseInt(event.target.project.value)*parseInt(event.target.quantity.value) )
             
