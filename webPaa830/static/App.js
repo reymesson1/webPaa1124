@@ -42,8 +42,8 @@ var Autosuggest = Autosuggest;
 
 var moment = moment;
 
-// const API_URL = 'http://localhost:8083'; 
-var API_URL = 'http://159.203.156.208:8083';
+var API_URL = 'http://localhost:8083';
+// const API_URL = 'http://159.203.156.208:8083';
 
 var API_HEADERS = {
 
@@ -1113,7 +1113,7 @@ var Master = function (_React$Component11) {
 
             var newItem = {
 
-                "id": Date.now(),
+                "id": this.state.masterAPI.length,
                 "date": today,
                 "fechaentrega": fechaentrega,
                 "firstname": event.target.firstname.value,
