@@ -664,7 +664,7 @@ class Master extends React.Component{
 
         let newMaster = {
 
-            "id": Date.now(),
+            "id": this.state.masterAPI.length,
             "date": today,
             "name": name,
             "item": this.state.masterDetail,

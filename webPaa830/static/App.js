@@ -1069,7 +1069,7 @@ var Master = function (_React$Component11) {
 
             var newMaster = {
 
-                "id": Date.now(),
+                "id": this.state.masterAPI.length,
                 "date": today,
                 "name": name,
                 "item": this.state.masterDetail,
