@@ -31,6 +31,7 @@ var Panel = ReactBootstrap.Panel;
 var Pagination = ReactBootstrap.Pagination;
 
 var Form = ReactBootstrap.Form;
+var Radio = ReactBootstrap.Radio;
 var FormGroup = ReactBootstrap.FormGroup;
 var FormControl = ReactBootstrap.FormControl;
 var ControlLabel = ReactBootstrap.ControlLabel;
@@ -244,16 +245,13 @@ var Actions = function (_React$Component2) {
 
             var currentTarget = '';
 
-            if (event.target.card.value == "yes") {
-                currentTarget = "card";
-            } else {
-                currentTarget = "cash";
-            }
+            // console.log(event.target.card.value)
+            // console.log(event.target.groupOptions.value)
 
             var newMaster = {
 
                 "id": this.props.params.actionid,
-                "payment": currentTarget
+                "payment": event.target.groupOptions.value
 
             };
 
@@ -266,7 +264,7 @@ var Actions = function (_React$Component2) {
 
             window.location.href = '/';
 
-            console.log(newMaster);
+            // console.log(newMaster)
         }
     }, {
         key: 'render',
@@ -298,7 +296,11 @@ var Actions = function (_React$Component2) {
                                             null,
                                             'Tarjerta'
                                         ),
-                                        React.createElement('input', { className: 'form-control', placeholder: 'Card', name: 'card', value: 'yes', type: 'radio' })
+                                        React.createElement(
+                                            Radio,
+                                            { name: 'groupOptions', value: 'card' },
+                                            'Tarjeta'
+                                        )
                                     ),
                                     React.createElement(
                                         Col,
@@ -308,7 +310,11 @@ var Actions = function (_React$Component2) {
                                             null,
                                             'Efectivo'
                                         ),
-                                        React.createElement('input', { className: 'form-control', placeholder: 'Cash', name: 'cash', value: 'no', type: 'radio' })
+                                        React.createElement(
+                                            Radio,
+                                            { name: 'groupOptions', value: 'cash' },
+                                            'Efectivo'
+                                        )
                                     )
                                 ),
                                 React.createElement(Row, null)
@@ -3759,7 +3765,27 @@ var PartialsTableBody = function (_React$Component31) {
         key: 'render',
         value: function render() {
 
-            console.log(this.props.masterAPI);
+            var nextState = void 0;
+
+            var tipoPagoEF = React.createElement(
+                'td',
+                { style: { 'font-size': '35px' } },
+                'EFECTIVO'
+            );
+
+            var tipoPagoTA = React.createElement(
+                'td',
+                { style: { 'font-size': '35px' } },
+                'TARJETA'
+            );
+
+            if (this.props.payment == "card") {
+
+                nextState = tipoPagoTA;
+            } else {
+
+                nextState = tipoPagoEF;
+            }
 
             return React.createElement(
                 'tr',
@@ -3784,7 +3810,7 @@ var PartialsTableBody = function (_React$Component31) {
                 React.createElement(
                     'td',
                     { style: { 'font-size': '35px' } },
-                    this.props.payment
+                    nextState
                 )
             );
         }

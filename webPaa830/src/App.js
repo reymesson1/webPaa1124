@@ -19,6 +19,7 @@ const Panel = ReactBootstrap.Panel;
 const Pagination = ReactBootstrap.Pagination;
 
 const Form = ReactBootstrap.Form;
+const Radio = ReactBootstrap.Radio;
 const FormGroup = ReactBootstrap.FormGroup;
 const FormControl = ReactBootstrap.FormControl;
 const ControlLabel = ReactBootstrap.ControlLabel;
@@ -224,16 +225,13 @@ class Actions extends React.Component{
 
         let currentTarget = ''
 
-        if(event.target.card.value=="yes"){
-            currentTarget = "card"
-        }else{
-            currentTarget = "cash"
-        }
+        // console.log(event.target.card.value)
+        // console.log(event.target.groupOptions.value)
 
         let newMaster = {
             
             "id": this.props.params.actionid,
-            "payment": currentTarget
+            "payment": event.target.groupOptions.value
 
         }
 
@@ -246,7 +244,7 @@ class Actions extends React.Component{
 
         window.location.href = '/';
         
-        console.log(newMaster)
+        // console.log(newMaster)
 
     }
 
@@ -262,13 +260,14 @@ class Actions extends React.Component{
                         
                             <Col xs={'6'}>
                                 <h3>Tarjerta</h3>
-                                <input className="form-control" placeholder="Card" name="card" value="yes" type="radio"/>
+                                {/* <input className="form-control" placeholder="Card" name="card" value="yes" type="radio"/> */}
+                                <Radio name="groupOptions" value="card" >Tarjeta</Radio>
                             </Col>
                             <Col xs={'6'}>
                                 <h3>Efectivo</h3>
-                                <input className="form-control" placeholder="Cash" name="cash" value="no" type="radio"/>
-                            </Col>
-                
+                                {/* <input className="form-control" placeholder="Cash" name="cash" value="no" type="radio"/> */}
+                                <Radio name="groupOptions" value="cash" >Efectivo</Radio>
+                            </Col>                
                         </Row>
                         <Row>
                             
@@ -2539,7 +2538,28 @@ class PartialsTableBody extends React.Component{
 
     render(){
 
-            console.log(this.props.masterAPI)
+        let nextState 
+        
+        let tipoPagoEF = (
+
+            <td style={{'font-size':'35px'}}>EFECTIVO</td>
+ 
+        );
+
+        let tipoPagoTA = (
+
+            <td style={{'font-size':'35px'}}>TARJETA</td>
+ 
+        );
+
+        if(this.props.payment=="card"){
+
+            nextState = tipoPagoTA
+        }else{
+            
+            nextState = tipoPagoEF
+        }
+
 
         return(
 
@@ -2548,7 +2568,8 @@ class PartialsTableBody extends React.Component{
                 <td style={{'font-size':'35px'}}>{this.props.date}</td>
                 <td style={{'font-size':'35px'}}>{this.props.name}</td>
                 <td style={{'font-size':'35px'}}>{this.props.project}.00</td>
-                <td style={{'font-size':'35px'}}>{this.props.payment}</td>
+                <td style={{'font-size':'35px'}}>{nextState}</td>
+                {/* <td style={{'font-size':'35px'}}>{this.props.payment}</td> */}
               </tr>
         );
     }
