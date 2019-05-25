@@ -286,7 +286,7 @@ var Actions = function (_React$Component2) {
                             null,
                             React.createElement(
                                 Panel,
-                                { header: 'Please click the correct option' },
+                                { header: 'Favor especificar el tipo de pago:' },
                                 React.createElement(
                                     Row,
                                     null,
@@ -296,7 +296,7 @@ var Actions = function (_React$Component2) {
                                         React.createElement(
                                             'h3',
                                             null,
-                                            'Yes'
+                                            'Tarjerta'
                                         ),
                                         React.createElement('input', { className: 'form-control', placeholder: 'Card', name: 'card', value: 'yes', type: 'radio' })
                                     ),
@@ -306,7 +306,7 @@ var Actions = function (_React$Component2) {
                                         React.createElement(
                                             'h3',
                                             null,
-                                            'No'
+                                            'Efectivo'
                                         ),
                                         React.createElement('input', { className: 'form-control', placeholder: 'Cash', name: 'cash', value: 'no', type: 'radio' })
                                     )
@@ -320,7 +320,7 @@ var Actions = function (_React$Component2) {
                             React.createElement(
                                 Button,
                                 { className: 'btn btn-default', type: 'submit' },
-                                'Submit'
+                                'Aceptar'
                             )
                         )
                     )
@@ -3615,8 +3615,7 @@ var PartialsTable = function (_React$Component30) {
                 null,
                 React.createElement(
                     'th',
-                    { style: { 'width': '15px', 'font-size': '25px',
-                            'border-spacing': '0 30px' } },
+                    { style: { 'width': '15px', 'font-size': '25px', 'border-spacing': '0 30px' } },
                     '#'
                 ),
                 React.createElement(
@@ -3631,8 +3630,7 @@ var PartialsTable = function (_React$Component30) {
                 ),
                 React.createElement(
                     'th',
-                    { style: { 'width': '15px',
-                            'font-size': '25px' } },
+                    { style: { 'width': '15px', 'font-size': '25px' } },
                     'Project'
                 )
             );
@@ -3642,28 +3640,27 @@ var PartialsTable = function (_React$Component30) {
                 null,
                 React.createElement(
                     'th',
-                    { style: { 'width': '15px', 'font-size': '25px',
-                            'border-spacing': '0 30px' } },
+                    { style: { 'width': '15px', 'font-size': '35px', 'border-spacing': '0 30px' } },
                     '#'
                 ),
                 React.createElement(
                     'th',
-                    { style: { 'width': '15px', 'font-size': '25px' } },
+                    { style: { 'width': '15px', 'font-size': '35px' } },
                     'Fecha'
                 ),
                 React.createElement(
                     'th',
-                    { style: { 'width': '15px', 'font-size': '25px' } },
+                    { style: { 'width': '15px', 'font-size': '35px' } },
                     'Cliente'
                 ),
                 React.createElement(
                     'th',
-                    { style: { 'width': '15px', 'font-size': '25px' } },
+                    { style: { 'width': '15px', 'font-size': '35px' } },
                     'Precio'
                 ),
                 React.createElement(
                     'th',
-                    { style: { 'width': '15px', 'font-size': '25px' } },
+                    { style: { 'width': '15px', 'font-size': '35px' } },
                     'Tipo Pago'
                 )
             );
@@ -3686,8 +3683,7 @@ var PartialsTable = function (_React$Component30) {
                     { xs: 12 },
                     React.createElement(
                         Table,
-                        { striped: true, bordered: true, condensed: true, hover: true,
-                            style: { 'width': '55%' } },
+                        { striped: true, bordered: true, condensed: true, hover: true, style: { 'width': '100%' } },
                         React.createElement(
                             'thead',
                             null,
@@ -3727,14 +3723,12 @@ var PartialsTable = function (_React$Component30) {
                                 ),
                                 React.createElement(
                                     'td',
-                                    { style: { 'width': '10px',
-                                            'font-size': '20px' } },
+                                    { style: { 'width': '10px', 'font-size': '35px' } },
                                     'Total'
                                 ),
                                 React.createElement(
                                     'td',
-                                    { style: { 'width': '10px',
-                                            'font-size': '20px' } },
+                                    { style: { 'width': '10px', 'font-size': '35px' } },
                                     'RD$',
                                     this.props.total,
                                     '.00'
@@ -3773,23 +3767,23 @@ var PartialsTableBody = function (_React$Component31) {
                 React.createElement('td', null),
                 React.createElement(
                     'td',
-                    { style: { 'font-size': '20px' } },
+                    { style: { 'font-size': '35px' } },
                     this.props.date
                 ),
                 React.createElement(
                     'td',
-                    { style: { 'font-size': '20px' } },
+                    { style: { 'font-size': '35px' } },
                     this.props.name
                 ),
                 React.createElement(
                     'td',
-                    { style: { 'font-size': '20px' } },
+                    { style: { 'font-size': '35px' } },
                     this.props.project,
                     '.00'
                 ),
                 React.createElement(
                     'td',
-                    { style: { 'font-size': '20px' } },
+                    { style: { 'font-size': '35px' } },
                     this.props.payment
                 )
             );

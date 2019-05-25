@@ -257,15 +257,15 @@ class Actions extends React.Component{
                 <form onSubmit={this.setPayment.bind(this)}>
                 <fieldset>
                 <Row>
-                    <Panel header="Please click the correct option">
+                    <Panel header="Favor especificar el tipo de pago:">
                         <Row>
                         
                             <Col xs={'6'}>
-                                <h3>Yes</h3>
+                                <h3>Tarjerta</h3>
                                 <input className="form-control" placeholder="Card" name="card" value="yes" type="radio"/>
                             </Col>
                             <Col xs={'6'}>
-                                <h3>No</h3>
+                                <h3>Efectivo</h3>
                                 <input className="form-control" placeholder="Cash" name="cash" value="no" type="radio"/>
                             </Col>
                 
@@ -276,7 +276,7 @@ class Actions extends React.Component{
                     </Panel>
                 </Row>
                 <Row>
-                    <Button className="btn btn-default" type="submit" >Submit</Button>
+                    <Button className="btn btn-default" type="submit" >Aceptar</Button>
                 </Row>
                 </fieldset>
                 </form>
@@ -2464,24 +2464,21 @@ class PartialsTable extends React.Component{
         let partialsTableEN = (
 
             <tr>
-                <th style={{'width':'15px', 'font-size':'25px',
-'border-spacing':'0 30px'}}>#</th>
+                <th style={{'width':'15px', 'font-size':'25px','border-spacing':'0 30px'}}>#</th>
                 <th style={{'width':'15px', 'font-size':'25px'}}>Date</th>
                 <th style={{'width':'15px', 'font-size':'25px'}}>Name</th>
-                <th style={{'width':'15px',
-'font-size':'25px'}}>Project</th>
+                <th style={{'width':'15px', 'font-size':'25px'}}>Project</th>
               </tr>
         );
 
         let partialsTableES = (
 
             <tr>
-                <th style={{'width':'15px', 'font-size':'25px',
-'border-spacing':'0 30px'}}>#</th>
-                <th style={{'width':'15px', 'font-size':'25px'}}>Fecha</th>
-                <th style={{'width':'15px', 'font-size':'25px'}}>Cliente</th>
-                <th style={{'width':'15px', 'font-size':'25px'}}>Precio</th>
-                <th style={{'width':'15px', 'font-size':'25px'}}>Tipo Pago</th>
+                <th style={{'width':'15px', 'font-size':'35px','border-spacing':'0 30px'}}>#</th>
+                <th style={{'width':'15px', 'font-size':'35px'}}>Fecha</th>
+                <th style={{'width':'15px', 'font-size':'35px'}}>Cliente</th>
+                <th style={{'width':'15px', 'font-size':'35px'}}>Precio</th>
+                <th style={{'width':'15px', 'font-size':'35px'}}>Tipo Pago</th>
               </tr>
         );
 
@@ -2500,8 +2497,7 @@ class PartialsTable extends React.Component{
 
                     <Row>
                         <Col xs={12}>
-                            <Table striped bordered condensed hover
-style={{'width':'55%'}}>
+                            <Table striped bordered condensed hover style={{'width':'100%'}}>
                                 <thead>
                                   {partialsTableActive}
                                 </thead>
@@ -2524,10 +2520,8 @@ style={{'width':'55%'}}>
                                     <tr>
                                         <td>&nbsp;</td>
                                         <td>&nbsp;</td>
-                                        <td style={{'width':'10px',
-'font-size':'20px'}}>Total</td>
-                                        <td style={{'width':'10px',
-'font-size':'20px'}}>RD${this.props.total}.00</td>
+                                        <td style={{'width':'10px','font-size':'35px'}}>Total</td>
+                                        <td style={{'width':'10px','font-size':'35px'}}>RD${this.props.total}.00</td>
                                         <br/>
                                         <br/>
                                     </tr>
@@ -2551,10 +2545,10 @@ class PartialsTableBody extends React.Component{
 
               <tr>
                 <td></td>
-                <td style={{'font-size':'20px'}}>{this.props.date}</td>
-                <td style={{'font-size':'20px'}}>{this.props.name}</td>
-                <td style={{'font-size':'20px'}}>{this.props.project}.00</td>
-                <td style={{'font-size':'20px'}}>{this.props.payment}</td>
+                <td style={{'font-size':'35px'}}>{this.props.date}</td>
+                <td style={{'font-size':'35px'}}>{this.props.name}</td>
+                <td style={{'font-size':'35px'}}>{this.props.project}.00</td>
+                <td style={{'font-size':'35px'}}>{this.props.payment}</td>
               </tr>
         );
     }
