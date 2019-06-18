@@ -32,15 +32,7 @@ app.post('/master', masterController.setMaster);
 
 app.post('/payment', masterController.updateMaster);
 
-app.post('/deletemaster', function(req,res){
-
-    var index = req.body;
-    var id = master[index.id].id;
-    
-    dba.setMaster({"id":id});
-
-    master.splice(index,1);
-});
+app.post('/deletemaster', masterController.removeMaster);
 
 app.get('/reporte', masterController.getMasterPartials)
 

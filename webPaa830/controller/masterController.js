@@ -6,7 +6,7 @@ var today = moment(new Date()).format('YYYY-MM-DD');
 
 exports.getMaster = async(req,res)=>{
 
-  var master = await Master.find({})
+  var master = await Master.find({"status":{$ne:"removed"}})
   
   res.send(master);
 }
@@ -39,6 +39,33 @@ exports.updateMaster = async(req,res)=>{
   })
 
   res.send(req.body);
+
+}
+
+exports.removeMaster = async(req,res)=>{
+
+  var userData = req.body.token;
+
+  var token = jwt.decode(req.body.token, '123')
+
+  if(token.sub == "5d091ad3c382341e4c088c72"){//username:supreme
+
+    var master = await Master.findOne({"id":req.body.id},function(err,m){
+    
+          if(!err){
+              
+              m.status="removed"
+              m.save(function(err, s){
+                  console.log('Removed Updated');
+              })
+          }
+      })
+    
+
+  }
+  
+  res.send(req.body);
+
 
 }
 

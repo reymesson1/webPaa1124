@@ -1175,7 +1175,7 @@ var Master = function (_React$Component11) {
 
                 method: 'post',
                 headers: API_HEADERS,
-                body: JSON.stringify({ "id": index })
+                body: JSON.stringify({ "id": index, token: token() })
             });
         }
     }, {
