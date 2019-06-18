@@ -43,8 +43,8 @@ var Autosuggest = Autosuggest;
 
 var moment = moment;
 
-// const API_URL = 'http://localhost:8083'; 
-var API_URL = 'http://159.203.156.208:8083';
+var API_URL = 'http://localhost:8083';
+// const API_URL = 'http://159.203.156.208:8083';
 
 var API_HEADERS = {
 
@@ -1463,7 +1463,7 @@ var MasterTable = function (_React$Component14) {
             var _this18 = this;
 
             var filteredMaster = this.props.masterData.filter(function (master) {
-                return master.name.indexOf(_this18.props.filterText) !== -1;
+                return master.name.toLowerCase().indexOf(_this18.props.filterText.toLowerCase()) !== -1;
             });
 
             var MasterTableEN = React.createElement(

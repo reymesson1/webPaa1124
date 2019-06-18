@@ -31,8 +31,8 @@ const Autosuggest = Autosuggest;
 
 const moment = moment;
 
-// const API_URL = 'http://localhost:8083'; 
-const API_URL = 'http://159.203.156.208:8083';
+const API_URL = 'http://localhost:8083'; 
+// const API_URL = 'http://159.203.156.208:8083';
 
 const API_HEADERS = {
 
@@ -991,7 +991,7 @@ class MasterTable extends React.Component{
 
         let filteredMaster = this.props.masterData.filter(
 
-            (master) => master.name.indexOf(this.props.filterText) !== -1
+            (master) => master.name.toLowerCase().indexOf(this.props.filterText.toLowerCase()) !== -1
         );
 
         let MasterTableEN = (
