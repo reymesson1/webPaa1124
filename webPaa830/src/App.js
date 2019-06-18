@@ -997,7 +997,7 @@ class MasterTable extends React.Component{
         let MasterTableEN = (
 
             <tr>
-                <th>#</th>
+                <th># </th>
                 <th>Date</th>
                 <th>Name</th>
                 <th>Item</th>

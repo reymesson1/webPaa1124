@@ -1472,7 +1472,7 @@ var MasterTable = function (_React$Component14) {
                 React.createElement(
                     'th',
                     null,
-                    '#'
+                    '# '
                 ),
                 React.createElement(
                     'th',
