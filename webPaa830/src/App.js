@@ -705,11 +705,29 @@ class Master extends React.Component{
         let today = moment(new Date()).format('DD-MM-YYYY');
         let fechaentrega = moment(new Date()).add(3, 'days').format('DD-MM-YYYY');
 
+        let days = moment(new Date()).add(3,'days').format('dddd');
+        if(days=='Monday'){
+           days='Lunes'
+        }else if(days=='Tuesday'){
+           days='Martes'
+        }else if(days=='Wednesday'){
+           days='Miercoles'
+        }else if(days=='Thursday'){
+           days='Jueves'
+        }else if(days=='Friday'){
+           days='Viernes'
+        }else if(days=='Saturday'){
+           days='Sabado'
+        }else{
+           days='Domingo'
+        }
+
+
         let newItem = {
 
             "id": this.state.masterAPI.length,
             "date": today,
-            "fechaentrega": fechaentrega,
+            "fechaentrega": days+" "+fechaentrega,
             "firstname":event.target.firstname.value,
             "item":event.target.suggest.value,
             "quantity": parseInt(event.target.quantity.value),
@@ -1157,8 +1175,8 @@ class MasterModal extends React.Component{
         return(
 
             <div >
-                <Modal show={this.props.showModal} onHide={this.props.close}>
-                  <Modal.Header closeButton>
+                <Modal show={this.props.showModal}>
+                  <Modal.Header>
                     {MasterModalActive}
                   </Modal.Header>
                   <Modal.Body>

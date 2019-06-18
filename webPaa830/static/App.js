@@ -1117,11 +1117,28 @@ var Master = function (_React$Component11) {
             var today = moment(new Date()).format('DD-MM-YYYY');
             var fechaentrega = moment(new Date()).add(3, 'days').format('DD-MM-YYYY');
 
+            var days = moment(new Date()).add(3, 'days').format('dddd');
+            if (days == 'Monday') {
+                days = 'Lunes';
+            } else if (days == 'Tuesday') {
+                days = 'Martes';
+            } else if (days == 'Wednesday') {
+                days = 'Miercoles';
+            } else if (days == 'Thursday') {
+                days = 'Jueves';
+            } else if (days == 'Friday') {
+                days = 'Viernes';
+            } else if (days == 'Saturday') {
+                days = 'Sabado';
+            } else {
+                days = 'Domingo';
+            }
+
             var newItem = {
 
                 "id": this.state.masterAPI.length,
                 "date": today,
-                "fechaentrega": fechaentrega,
+                "fechaentrega": days + " " + fechaentrega,
                 "firstname": event.target.firstname.value,
                 "item": event.target.suggest.value,
                 "quantity": parseInt(event.target.quantity.value),
@@ -1755,10 +1772,10 @@ var MasterModal = function (_React$Component17) {
                 null,
                 React.createElement(
                     Modal,
-                    { show: this.props.showModal, onHide: this.props.close },
+                    { show: this.props.showModal },
                     React.createElement(
                         Modal.Header,
-                        { closeButton: true },
+                        null,
                         MasterModalActive
                     ),
                     React.createElement(
