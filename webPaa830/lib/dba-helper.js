@@ -114,7 +114,7 @@ module.exports = function(){
                 var url = "mongodb://localhost:27017/supreme";
                 MongoClient.connect(url, function(err, db) {
                     if (err) throw err;
-                      db.collection("master").aggregate([{"$project":{"_id":true,"date":true,"item.development":true,"project":true,"pago":"$project"}},{"$group":{"_id":{"fecha":"$date","item":"$item.development"},"total":{"$sum":"$pago"}}},{"$group":{"_id":"$_id.fecha","count":{"$push":{"item":"$_id.item","totales":"$total"}}}},{"$sort":{"_id":-1}}]).toArray(function(err,result){
+                      db.collection("masters").aggregate([{"$project":{"_id":true,"date":true,"item.item":true,"project":true,"pago":"$project"}},{"$group":{"_id":{"fecha":"$date","item":"$item.item"},"total":{"$sum":"$pago"}}},{"$group":{"_id":"$_id.fecha","count":{"$push":{"item":"$_id.item","totales":"$total"}}}},{"$sort":{"_id":-1}}]).toArray(function(err,result){
                           callback(result);
                 })
                 db.close();
@@ -129,7 +129,7 @@ module.exports = function(){
                 MongoClient.connect(url, function(err, db) {
                     if (err) throw err;
                       //db.collection("master").aggregate([{"$match":{"date":{"$gte":"2018-06-15","$lte":"2018-06-31"}}},{"$group":{"_id":"$item.development","total":{"$sum":"$project"}}},{"$sort":{"_id":1}}]).toArray(function(err,result){
-               db.collection("master").aggregate([{"$match":{"date":{"$gte":"2018-08-15","$lte":"2018-08-31"}}},{"$unwind":"$item"},{"$group":{"_id":"$item.development","total":{"$sum":"$project"}}}]).toArray(function(err,result){      
+               db.collection("masters").aggregate([{"$match":{"date":{"$gte":"2019-06-15","$lte":"2019-09-31"}}},{"$unwind":"$item"},{"$group":{"_id":"$item.item","total":{"$sum":"$project"}}},{"$sort":{"total":-1}}]).toArray(function(err,result){      
    
 			callback(result); 
                 })
