@@ -31,8 +31,8 @@ const Autosuggest = Autosuggest;
 
 const moment = moment;
 
-// const API_URL = 'http://localhost:8083'; 
-const API_URL = 'http://159.203.156.208:8083';
+const API_URL = 'http://localhost:8083';  
+// const API_URL = 'http://159.203.156.208:8083';
 
 const API_HEADERS = {
 
@@ -41,6 +41,9 @@ const API_HEADERS = {
 }
 
 const TOKEN_KEY = "token";
+
+var global = 0;
+var global2 = 0;
 
 const languageActive = false;
 
@@ -1009,6 +1012,7 @@ class MasterTable extends React.Component{
         let MasterTableES = (
 
             <tr>
+                <th>&nbsp;</th>
                 <th>#</th>
                 <th>Fecha</th>
                 <th>Nombre</th>
@@ -1079,10 +1083,16 @@ class MasterTableBody extends React.Component{
         console.log('clicked!');
     } 
 
+    onAttached(event){
+        
+        global2 = event.target.value;
+    }
+
     render(){
 
         return(
                 <tr>
+                    <td><input type="radio" name="radioCust" value={this.props.name} onClick={this.onAttached.bind(this)} /></td>
                     <td>{this.props.id}</td>
                     <td>{this.props.date}</td>
                     <td>{this.props.name}</td>
@@ -1361,8 +1371,7 @@ class MasterModalField extends React.Component{
         let MasterModalFieldEN = (
 
                 <Row>
-                    <Form
-onSubmit={this.props.masterCallback.onsavedetail.bind(this)}>
+                    <Form onSubmit={this.props.masterCallback.onsavedetail.bind(this)}>
                         <Row>
                             <FormGroup controlId="formHorizontalName">
                               <Col componentClass={ControlLabel} md={1} sm={2}>
@@ -1450,40 +1459,33 @@ name="development" placeholder="List" required >
                   </Row>
         );
 
-        let MasterModalFieldES = (
+        let MasterModalFieldListES = (
 
                 <Row>
-                    <Form
-onSubmit={this.props.masterCallback.onsavedetail.bind(this)}>
+                    <Form onSubmit={this.props.masterCallback.onsavedetail.bind(this)}>
                         <Row>
                             <FormGroup controlId="formHorizontalName">
                               <Col componentClass={ControlLabel} md={1} sm={2}>
                                 Cliente
                               </Col>
                               <Col md={4} sm={6}>
-                                <FormControl type="text"
-name="firstname" placeholder="Cliente" required />
+                                <FormControl type="text" name="firstname" placeholder="Cliente" required />
                               </Col>
                             </FormGroup>
                         </Row>
                         <br/>
                         <Row>
                             <FormGroup controlId="formHorizontalItem">
-                                  <Col componentClass={ControlLabel}
-md={1} sm={2}>
+                                  <Col componentClass={ControlLabel} md={1} sm={2}>
                                     Articulo
                                   </Col>
                                   <Col md={4} sm={6}>
                                     <Autosuggest
-                                               suggestions={suggestions}
-
-onSuggestionsFetchRequested={this.onSuggestionsFetchRequested.bind(this)}
-
-onSuggestionsClearRequested={this.onSuggestionsClearRequested.bind(this)}
-
-renderSuggestion={renderSuggestion}
-
-getSuggestionValue={getSuggestionValue}
+                                               suggestions={suggestions} 
+                                               onSuggestionsFetchRequested={this.onSuggestionsFetchRequested.bind(this)} 
+                                               onSuggestionsClearRequested={this.onSuggestionsClearRequested.bind(this)}
+                                               renderSuggestion={renderSuggestion}
+                                               getSuggestionValue={getSuggestionValue}
                                                inputProps={inputProps}
                                     />
                                   </Col>
@@ -1540,13 +1542,102 @@ placeholder="Name" value={this.state.value} />
                   </Row>
         );
 
+        let MasterModalFieldNoListES = (
+            
+                            <Row>
+                                <Form onSubmit={this.props.masterCallback.onsavedetail.bind(this)}>
+                                    <Row>
+                                        <FormGroup controlId="formHorizontalName">
+                                          <Col componentClass={ControlLabel} md={1} sm={2}>
+                                            Cliente
+                                          </Col>
+                                          <Col md={4} sm={6}>
+                                            <FormControl type="text" name="firstname" placeholder="Cliente" value={global2} required />
+                                          </Col>
+                                        </FormGroup>
+                                    </Row>
+                                    <br/>
+                                    <Row>
+                                        <FormGroup controlId="formHorizontalItem">
+                                              <Col componentClass={ControlLabel} md={1} sm={2}>
+                                                Articulo
+                                              </Col>
+                                              <Col md={4} sm={6}>
+                                                <Autosuggest
+                                                           suggestions={suggestions} 
+                                                           onSuggestionsFetchRequested={this.onSuggestionsFetchRequested.bind(this)} 
+                                                           onSuggestionsClearRequested={this.onSuggestionsClearRequested.bind(this)}
+                                                           renderSuggestion={renderSuggestion}
+                                                           getSuggestionValue={getSuggestionValue}
+                                                           inputProps={inputProps}
+                                                />
+                                              </Col>
+                                        </FormGroup>
+                                    </Row>
+                                    <br/>
+                                    <Row>
+                                        <FormGroup controlId="formControlsSelect">
+                                            <Col md={1} sm={2}>
+                                              <ControlLabel>Tipo de Servicio</ControlLabel>
+                                            </Col>
+                                            <Col md={4} sm={6}>
+                                              <FormControl componentClass="select" name="development" placeholder="Tipo de Servicio" required >
+                                                {this.state.peluqueraData.sort((a,b)=>a.name>b.name).map(
+                                                    item => <option value={item.name}>{item.name}</option>                                    
+                                                )}
+                                              </FormControl>
+                                            </Col>
+                                        </FormGroup>
+                                    </Row>
+                                    <br/>
+                                    <Row>
+                                        <FormGroup controlId="formHorizontalName">
+                                          <Col componentClass={ControlLabel} md={1} sm={2}>
+                                            Precio
+                                          </Col>
+                                          <Col md={4} sm={6}>
+                                            <FormControl type="text" name="project" placeholder="Precio" required />
+                                          </Col>                              
+                                        </FormGroup>
+                                    </Row>
+                                    <br/>
+                                    <Row>
+                                        <FormGroup controlId="formHorizontalName">
+                                          <Col componentClass={ControlLabel} md={1} sm={2}>
+                                            Cantidad
+                                          </Col>
+                                          <Col md={4} sm={6}>
+                                            <FormControl type="text" name="quantity" placeholder="Cantidad" required />
+                                          </Col>
+                                          <Col md={2} sm={2} >
+                                                <Button type="submit"><i className="fa fa-plus" aria-hidden="true"></i></Button>
+                                          </Col>
+                                        </FormGroup>
+                                    </Row>
+                                    <br/>                        
+                                    <Row>
+                                        <input
+            style={{'width':'70px','display':'none'}} type="text" name="suggest"
+            placeholder="Name" value={this.state.value} />
+                                    </Row>
+                                </Form>
+            
+                              </Row>
+                    );
+
         let MasterModalFieldActive;
 
         if(languageActive){
 
             MasterModalFieldActive=MasterModalFieldEN
         }else{
-            MasterModalFieldActive=MasterModalFieldES
+            if(global2==0){
+
+                MasterModalFieldActive=MasterModalFieldListES
+            }else{
+                                
+                MasterModalFieldActive=MasterModalFieldNoListES
+            }
         }
 
         return(

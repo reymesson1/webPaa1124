@@ -43,8 +43,8 @@ var Autosuggest = Autosuggest;
 
 var moment = moment;
 
-// const API_URL = 'http://localhost:8083'; 
-var API_URL = 'http://159.203.156.208:8083';
+var API_URL = 'http://localhost:8083';
+// const API_URL = 'http://159.203.156.208:8083';
 
 var API_HEADERS = {
 
@@ -53,6 +53,9 @@ var API_HEADERS = {
 };
 
 var TOKEN_KEY = "token";
+
+var global = 0;
+var global2 = 0;
 
 var languageActive = false;
 
@@ -1507,6 +1510,11 @@ var MasterTable = function (_React$Component14) {
                 React.createElement(
                     'th',
                     null,
+                    '\xA0'
+                ),
+                React.createElement(
+                    'th',
+                    null,
                     '#'
                 ),
                 React.createElement(
@@ -1615,12 +1623,23 @@ var MasterTableBody = function (_React$Component15) {
             console.log('clicked!');
         }
     }, {
+        key: 'onAttached',
+        value: function onAttached(event) {
+
+            global2 = event.target.value;
+        }
+    }, {
         key: 'render',
         value: function render() {
 
             return React.createElement(
                 'tr',
                 null,
+                React.createElement(
+                    'td',
+                    null,
+                    React.createElement('input', { type: 'radio', name: 'radioCust', value: this.props.name, onClick: this.onAttached.bind(this) })
+                ),
                 React.createElement(
                     'td',
                     null,
@@ -1963,8 +1982,7 @@ var MasterModalField = function (_React$Component18) {
                 null,
                 React.createElement(
                     Form,
-                    {
-                        onSubmit: this.props.masterCallback.onsavedetail.bind(this) },
+                    { onSubmit: this.props.masterCallback.onsavedetail.bind(this) },
                     React.createElement(
                         Row,
                         null,
@@ -2117,13 +2135,12 @@ var MasterModalField = function (_React$Component18) {
                 )
             );
 
-            var MasterModalFieldES = React.createElement(
+            var MasterModalFieldListES = React.createElement(
                 Row,
                 null,
                 React.createElement(
                     Form,
-                    {
-                        onSubmit: this.props.masterCallback.onsavedetail.bind(this) },
+                    { onSubmit: this.props.masterCallback.onsavedetail.bind(this) },
                     React.createElement(
                         Row,
                         null,
@@ -2138,8 +2155,7 @@ var MasterModalField = function (_React$Component18) {
                             React.createElement(
                                 Col,
                                 { md: 4, sm: 6 },
-                                React.createElement(FormControl, { type: 'text',
-                                    name: 'firstname', placeholder: 'Cliente', required: true })
+                                React.createElement(FormControl, { type: 'text', name: 'firstname', placeholder: 'Cliente', required: true })
                             )
                         )
                     ),
@@ -2152,8 +2168,7 @@ var MasterModalField = function (_React$Component18) {
                             { controlId: 'formHorizontalItem' },
                             React.createElement(
                                 Col,
-                                { componentClass: ControlLabel,
-                                    md: 1, sm: 2 },
+                                { componentClass: ControlLabel, md: 1, sm: 2 },
                                 'Articulo'
                             ),
                             React.createElement(
@@ -2161,13 +2176,152 @@ var MasterModalField = function (_React$Component18) {
                                 { md: 4, sm: 6 },
                                 React.createElement(Autosuggest, {
                                     suggestions: suggestions,
-
                                     onSuggestionsFetchRequested: this.onSuggestionsFetchRequested.bind(this),
-
                                     onSuggestionsClearRequested: this.onSuggestionsClearRequested.bind(this),
-
                                     renderSuggestion: renderSuggestion,
+                                    getSuggestionValue: getSuggestionValue,
+                                    inputProps: inputProps
+                                })
+                            )
+                        )
+                    ),
+                    React.createElement('br', null),
+                    React.createElement(
+                        Row,
+                        null,
+                        React.createElement(
+                            FormGroup,
+                            { controlId: 'formControlsSelect' },
+                            React.createElement(
+                                Col,
+                                { md: 1, sm: 2 },
+                                React.createElement(
+                                    ControlLabel,
+                                    null,
+                                    'Tipo de Servicio'
+                                )
+                            ),
+                            React.createElement(
+                                Col,
+                                { md: 4, sm: 6 },
+                                React.createElement(
+                                    FormControl,
+                                    { componentClass: 'select', name: 'development', placeholder: 'Tipo de Servicio', required: true },
+                                    this.state.peluqueraData.sort(function (a, b) {
+                                        return a.name > b.name;
+                                    }).map(function (item) {
+                                        return React.createElement(
+                                            'option',
+                                            { value: item.name },
+                                            item.name
+                                        );
+                                    })
+                                )
+                            )
+                        )
+                    ),
+                    React.createElement('br', null),
+                    React.createElement(
+                        Row,
+                        null,
+                        React.createElement(
+                            FormGroup,
+                            { controlId: 'formHorizontalName' },
+                            React.createElement(
+                                Col,
+                                { componentClass: ControlLabel, md: 1, sm: 2 },
+                                'Precio'
+                            ),
+                            React.createElement(
+                                Col,
+                                { md: 4, sm: 6 },
+                                React.createElement(FormControl, { type: 'text', name: 'project', placeholder: 'Precio', required: true })
+                            )
+                        )
+                    ),
+                    React.createElement('br', null),
+                    React.createElement(
+                        Row,
+                        null,
+                        React.createElement(
+                            FormGroup,
+                            { controlId: 'formHorizontalName' },
+                            React.createElement(
+                                Col,
+                                { componentClass: ControlLabel, md: 1, sm: 2 },
+                                'Cantidad'
+                            ),
+                            React.createElement(
+                                Col,
+                                { md: 4, sm: 6 },
+                                React.createElement(FormControl, { type: 'text', name: 'quantity', placeholder: 'Cantidad', required: true })
+                            ),
+                            React.createElement(
+                                Col,
+                                { md: 2, sm: 2 },
+                                React.createElement(
+                                    Button,
+                                    { type: 'submit' },
+                                    React.createElement('i', { className: 'fa fa-plus', 'aria-hidden': 'true' })
+                                )
+                            )
+                        )
+                    ),
+                    React.createElement('br', null),
+                    React.createElement(
+                        Row,
+                        null,
+                        React.createElement('input', {
+                            style: { 'width': '70px', 'display': 'none' }, type: 'text', name: 'suggest',
+                            placeholder: 'Name', value: this.state.value })
+                    )
+                )
+            );
 
+            var MasterModalFieldNoListES = React.createElement(
+                Row,
+                null,
+                React.createElement(
+                    Form,
+                    { onSubmit: this.props.masterCallback.onsavedetail.bind(this) },
+                    React.createElement(
+                        Row,
+                        null,
+                        React.createElement(
+                            FormGroup,
+                            { controlId: 'formHorizontalName' },
+                            React.createElement(
+                                Col,
+                                { componentClass: ControlLabel, md: 1, sm: 2 },
+                                'Cliente'
+                            ),
+                            React.createElement(
+                                Col,
+                                { md: 4, sm: 6 },
+                                React.createElement(FormControl, { type: 'text', name: 'firstname', placeholder: 'Cliente', value: global2, required: true })
+                            )
+                        )
+                    ),
+                    React.createElement('br', null),
+                    React.createElement(
+                        Row,
+                        null,
+                        React.createElement(
+                            FormGroup,
+                            { controlId: 'formHorizontalItem' },
+                            React.createElement(
+                                Col,
+                                { componentClass: ControlLabel, md: 1, sm: 2 },
+                                'Articulo'
+                            ),
+                            React.createElement(
+                                Col,
+                                { md: 4, sm: 6 },
+                                React.createElement(Autosuggest, {
+                                    suggestions: suggestions,
+                                    onSuggestionsFetchRequested: this.onSuggestionsFetchRequested.bind(this),
+                                    onSuggestionsClearRequested: this.onSuggestionsClearRequested.bind(this),
+                                    renderSuggestion: renderSuggestion,
                                     getSuggestionValue: getSuggestionValue,
                                     inputProps: inputProps
                                 })
@@ -2273,7 +2427,13 @@ var MasterModalField = function (_React$Component18) {
 
                 MasterModalFieldActive = MasterModalFieldEN;
             } else {
-                MasterModalFieldActive = MasterModalFieldES;
+                if (global2 == 0) {
+
+                    MasterModalFieldActive = MasterModalFieldListES;
+                } else {
+
+                    MasterModalFieldActive = MasterModalFieldNoListES;
+                }
             }
 
             return React.createElement(
