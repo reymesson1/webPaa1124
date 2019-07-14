@@ -1015,7 +1015,8 @@ var Master = function (_React$Component11) {
             filterText: '',
             activePage: 1,
             masterAPI: [],
-            masterDetail: []
+            masterDetail: [],
+            counter: []
         };
         return _this13;
     }
@@ -1031,6 +1032,14 @@ var Master = function (_React$Component11) {
                 _this14.setState({
 
                     masterAPI: responseData
+                });
+            });
+            fetch(API_URL + '/counter', { headers: API_HEADERS }).then(function (response) {
+                return response.json();
+            }).then(function (responseData) {
+                _this14.setState({
+
+                    counter: responseData
                 });
             }).catch(function (error) {
                 console.log('Error fetching and parsing data', error);
@@ -1075,7 +1084,7 @@ var Master = function (_React$Component11) {
 
             var newMaster = {
 
-                "id": this.state.masterAPI.length,
+                "id": this.state.counter[0].quantity,
                 "date": today,
                 "name": name,
                 "item": this.state.masterDetail,
@@ -1100,6 +1109,13 @@ var Master = function (_React$Component11) {
             });
 
             fetch(API_URL + '/master', {
+
+                method: 'post',
+                headers: API_HEADERS,
+                body: JSON.stringify(newMaster)
+            });
+
+            fetch(API_URL + '/addcounter', {
 
                 method: 'post',
                 headers: API_HEADERS,
@@ -1136,7 +1152,7 @@ var Master = function (_React$Component11) {
 
             var newItem = {
 
-                "id": this.state.masterAPI.length,
+                "id": this.state.counter[0].quantity,
                 "date": today,
                 "fechaentrega": days + " " + fechaentrega,
                 "firstname": event.target.firstname.value,

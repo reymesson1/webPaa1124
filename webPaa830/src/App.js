@@ -608,7 +608,8 @@ class Master extends React.Component{
             filterText: '',
             activePage: 1,
             masterAPI: [],
-            masterDetail: []
+            masterDetail: [],
+            counter: []
         };
     }
 
@@ -620,6 +621,14 @@ class Master extends React.Component{
               this.setState({
 
                   masterAPI: responseData
+              })
+          })
+          fetch(API_URL+'/counter',{headers: API_HEADERS})
+          .then((response)=>response.json())
+          .then((responseData)=>{
+              this.setState({
+
+                    counter: responseData
               })
           })
           .catch((error)=>{
@@ -663,7 +672,7 @@ class Master extends React.Component{
 
         let newMaster = {
 
-            "id": this.state.masterAPI.length,
+            "id": this.state.counter[0].quantity,
             "date": today,
             "name": name,
             "item": this.state.masterDetail,
@@ -693,6 +702,13 @@ class Master extends React.Component{
               headers: API_HEADERS,
               body: JSON.stringify(newMaster)
         })
+
+        fetch(API_URL+'/addcounter', {
+
+            method: 'post',
+           headers: API_HEADERS,
+           body: JSON.stringify(newMaster)
+       })
 
     }
 
@@ -725,7 +741,7 @@ class Master extends React.Component{
 
         let newItem = {
 
-            "id": this.state.masterAPI.length,
+            "id": this.state.counter[0].quantity,
             "date": today,
             "fechaentrega": days+" "+fechaentrega,
             "firstname":event.target.firstname.value,
