@@ -44,6 +44,8 @@ const TOKEN_KEY = "token";
 
 const languageActive = false;
 
+var global = 0;
+
 function token(){
     
        return localStorage.getItem(TOKEN_KEY);
@@ -1025,6 +1027,7 @@ class MasterTable extends React.Component{
         let MasterTableES = (
 
             <tr>
+                <th>&nbsp;</th>
                 <th>#</th>
                 <th>Fecha</th>
                 <th>Nombre</th>
@@ -1095,10 +1098,16 @@ class MasterTableBody extends React.Component{
         console.log('clicked!');
     } 
 
+    onClicked(event){
+
+        global = event.target.value;
+    }
+
     render(){
 
         return(
                 <tr>
+                    <td><input type="radio" name="radioCust" value={this.props.name} onClick={this.onClicked.bind(this)} /></td>
                     <td>{this.props.id}</td>
                     <td>{this.props.date}</td>
                     <td>{this.props.name}</td>
@@ -1466,40 +1475,46 @@ name="development" placeholder="List" required >
                   </Row>
         );
 
+        let customerDisplay = (
+            <FormControl type="text" name="firstname" placeholder="Cliente" required />
+        );
+
+        let customerDisplayGlobal = (
+            <FormControl type="text" name="firstname" placeholder="Cliente" value={global} required />
+        );
+
+        let customerDisplayActive;
+
+        if(global==0){
+            customerDisplayActive = customerDisplay
+        }else{
+            customerDisplayActive = customerDisplayGlobal
+        }
+
         let MasterModalFieldES = (
 
                 <Row>
-                    <Form
-onSubmit={this.props.masterCallback.onsavedetail.bind(this)}>
+                    <Form onSubmit={this.props.masterCallback.onsavedetail.bind(this)}>
                         <Row>
                             <FormGroup controlId="formHorizontalName">
                               <Col componentClass={ControlLabel} md={1} sm={2}>
                                 Cliente
                               </Col>
                               <Col md={4} sm={6}>
-                                <FormControl type="text"
-name="firstname" placeholder="Cliente" required />
+                                {/* <FormControl type="text" name="firstname" placeholder="Cliente" required /> */}
+                                {customerDisplayActive}
                               </Col>
                             </FormGroup>
                         </Row>
                         <br/>
                         <Row>
                             <FormGroup controlId="formHorizontalItem">
-                                  <Col componentClass={ControlLabel}
-md={1} sm={2}>
+                                  <Col componentClass={ControlLabel} md={1} sm={2}>
                                     Articulo
                                   </Col>
                                   <Col md={4} sm={6}>
                                     <Autosuggest
-                                               suggestions={suggestions}
-
-onSuggestionsFetchRequested={this.onSuggestionsFetchRequested.bind(this)}
-
-onSuggestionsClearRequested={this.onSuggestionsClearRequested.bind(this)}
-
-renderSuggestion={renderSuggestion}
-
-getSuggestionValue={getSuggestionValue}
+                                               suggestions={suggestions} onSuggestionsFetchRequested={this.onSuggestionsFetchRequested.bind(this)} onSuggestionsClearRequested={this.onSuggestionsClearRequested.bind(this)} renderSuggestion={renderSuggestion} getSuggestionValue={getSuggestionValue}
                                                inputProps={inputProps}
                                     />
                                   </Col>
