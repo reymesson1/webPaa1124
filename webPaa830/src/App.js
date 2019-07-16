@@ -518,6 +518,7 @@ class Toolbar extends React.Component{
                       <li><Link to={'/detail'}>Inventario</Link></li>
                       <NavDropdown eventKey={3} title="Reportes" id="basic-nav-dropdown">
                             <MenuItem eventKey={3.1}><Link to="/partials">Cuadre</Link></MenuItem>
+                            <MenuItem eventKey={3.1}><Link to="/customer">Customer</Link></MenuItem>
                             <MenuItem eventKey={3.2}><Link to="/bipartials">Resume Cuadre por Tipo de Servicio</Link></MenuItem>
                             <MenuItem eventKey={3.3}><Link to="/tripartials">Resumen Cuadre General</Link></MenuItem>
                             <MenuItem divider />
@@ -672,7 +673,8 @@ class Master extends React.Component{
             "item": this.state.masterDetail,
             "project": zoom,
             "status":"pending",
-            "payment": ""
+            "payment": "",
+            "telefono": ""
 
         }
 
@@ -3208,10 +3210,186 @@ class Account extends React.Component{
     }
 }
 
+class Customer extends React.Component{
+    
+    render(){
+
+        return(
+
+            <CustomerTable/>
+        );
+    }
+}
+
+class CustomerTable extends React.Component{
+
+    constructor() {
+        
+        super();
+        this.state = {            
+            id: 0,
+            masterAPI: [],
+            show: false,
+            handleClose: true
+        };
+    }
+
+    componentDidMount(){
+        
+        fetch(API_URL+'/master',{headers: API_HEADERS})
+        .then((response)=>response.json())
+        .then((responseData)=>{
+            this.setState({
+
+                masterAPI: responseData                
+            })
+        })
+        .catch((error)=>{
+            console.log('Error fetching and parsing data', error);
+        })
+        
+    }
+
+    onClicked(event){
+
+        this.setState({
+
+            show: true,
+            id: event.target.value
+        })
+
+    }
+
+    onSubmit(event){
+
+        event.preventDefault();
+
+        let masterData = this.state.masterAPI.filter(
+
+            (master) =>  master.id == event.target.id.value
+        )
+
+        let newMaster = {
+
+            "id": this.state.id,
+            "telefono": event.target.telefono.value
+        }
+
+        fetch(API_URL+'/mastercustomerupdate', {
+            
+                method: 'post',
+                headers: API_HEADERS,
+                body: JSON.stringify(newMaster)
+        })      
+        
+        this.setState({
+
+            show: false
+        })
+
+        console.log(event.target.telefono.value);
+    }
+    
+    render(){
+
+        return(
+            <div>
+            <Table striped bordered condensed hover>
+                <thead>
+                        <tr>
+                            <th>&nbsp;</th>                            
+                            <th>Nombre</th>                            
+                            <th>Apellido</th>                            
+                            <th>Telefono</th>                            
+                            <th>Actions</th>                            
+                        </tr>
+                </thead>
+                <tbody>
+                {this.state.masterAPI.map(
+
+                    (master) => 
+                    <tr>
+                        <td>{master.id}</td>
+                        <td>{master.name}</td>
+                        <td>{'Test'}</td>                                                
+                        <td>{'Test'}</td>                                                
+                        <td>
+                            <Button value={master.id} onClick={this.onClicked.bind(this)}>Edit</Button>
+                        </td>                                                
+                    </tr>
+                )}
+                </tbody>
+            </Table>
+
+            <Modal show={this.state.show}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Edit Modal</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>                    
+                        <Form onSubmit={this.onSubmit.bind(this)} >
+                            <Row>
+                                <FormGroup controlId="formHorizontalName">
+                                <Col componentClass={ControlLabel} md={2} sm={3}>
+                                    ID
+                                </Col>
+                                <Col md={8} sm={9}>
+                                    <FormControl type="text" name="ID" placeholder="ID" value={this.state.id} disabled />
+                                </Col>                                
+                                </FormGroup>                                
+                            </Row>
+                            <br/>
+                            <Row>
+                                <FormGroup controlId="formHorizontalName">
+                                <Col componentClass={ControlLabel} md={2} sm={3}>
+                                    Name
+                                </Col>
+                                <Col md={8} sm={9}>
+                                    <FormControl type="text" name="firstname" placeholder="Name" disabled />
+                                </Col>                                
+                                </FormGroup>                                
+                            </Row>
+                            <br/>
+                            <Row>
+                                <FormGroup controlId="formHorizontalName">
+                                <Col componentClass={ControlLabel} md={2} sm={3}>
+                                    Last Name
+                                </Col>
+                                <Col md={8} sm={9}>
+                                    <FormControl type="text" name="firstname" placeholder="Last Name" disabled />
+                                </Col>                                
+                                </FormGroup>                                
+                            </Row>
+                            <br/>
+                            <Row>
+                                <FormGroup controlId="formHorizontalName">
+                                <Col componentClass={ControlLabel} md={2} sm={3}>
+                                    Telefono
+                                </Col>
+                                <Col md={8} sm={9}>
+                                    <FormControl type="text" name="telefono" placeholder="Telefono" required />
+                                </Col>                                
+                                </FormGroup>                                
+                            </Row>
+                            <Row>
+                                <Button className="pull-right" type="submit">Save</Button>                                
+                            </Row>
+                        </Form>                    
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button>Save</Button>
+                </Modal.Footer>
+            </Modal>
+
+            </div>
+        );
+    }
+}
+
 
 ReactDOM.render((
   <Router history={browserHistory}>
     <Route path="/" component={App}>
+        <Route path="customer" component={Customer}/>
         <Route path="account" component={Account}/>
         <Route path="agregar_tiposervicio" component={AgregarPeluquera}/>
         <Route path="tripartials" component={TriPartials}/>

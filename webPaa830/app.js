@@ -184,6 +184,8 @@ app.post('/resetpassword', async (req, res)=>{
     res.send({"message":"Successfully reset!"})
 })
 
+app.post('/mastercustomerupdate', masterController.getMasterCustomer)
+
   
 
 mongoose.connect('mongodb://localhost:27017/supreme',(err)=>{

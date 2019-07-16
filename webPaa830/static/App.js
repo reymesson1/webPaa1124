@@ -801,6 +801,15 @@ var Toolbar = function (_React$Component8) {
                         ),
                         React.createElement(
                             MenuItem,
+                            { eventKey: 3.1 },
+                            React.createElement(
+                                Link,
+                                { to: '/customer' },
+                                'Customer'
+                            )
+                        ),
+                        React.createElement(
+                            MenuItem,
                             { eventKey: 3.2 },
                             React.createElement(
                                 Link,
@@ -1084,7 +1093,8 @@ var Master = function (_React$Component11) {
                 "item": this.state.masterDetail,
                 "project": zoom,
                 "status": "pending",
-                "payment": ""
+                "payment": "",
+                "telefono": ""
 
             };
 
@@ -4877,12 +4887,311 @@ var Account = function (_React$Component44) {
     return Account;
 }(React.Component);
 
+var Customer = function (_React$Component45) {
+    _inherits(Customer, _React$Component45);
+
+    function Customer() {
+        _classCallCheck(this, Customer);
+
+        return _possibleConstructorReturn(this, (Customer.__proto__ || Object.getPrototypeOf(Customer)).apply(this, arguments));
+    }
+
+    _createClass(Customer, [{
+        key: 'render',
+        value: function render() {
+
+            return React.createElement(CustomerTable, null);
+        }
+    }]);
+
+    return Customer;
+}(React.Component);
+
+var CustomerTable = function (_React$Component46) {
+    _inherits(CustomerTable, _React$Component46);
+
+    function CustomerTable() {
+        _classCallCheck(this, CustomerTable);
+
+        var _this64 = _possibleConstructorReturn(this, (CustomerTable.__proto__ || Object.getPrototypeOf(CustomerTable)).call(this));
+
+        _this64.state = {
+            id: 0,
+            masterAPI: [],
+            show: false,
+            handleClose: true
+        };
+        return _this64;
+    }
+
+    _createClass(CustomerTable, [{
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            var _this65 = this;
+
+            fetch(API_URL + '/master', { headers: API_HEADERS }).then(function (response) {
+                return response.json();
+            }).then(function (responseData) {
+                _this65.setState({
+
+                    masterAPI: responseData
+                });
+            }).catch(function (error) {
+                console.log('Error fetching and parsing data', error);
+            });
+        }
+    }, {
+        key: 'onClicked',
+        value: function onClicked(event) {
+
+            this.setState({
+
+                show: true,
+                id: event.target.value
+            });
+        }
+    }, {
+        key: 'onSubmit',
+        value: function onSubmit(event) {
+
+            event.preventDefault();
+
+            var masterData = this.state.masterAPI.filter(function (master) {
+                return master.id == event.target.id.value;
+            });
+
+            var newMaster = {
+
+                "id": this.state.id,
+                "telefono": event.target.telefono.value
+            };
+
+            fetch(API_URL + '/mastercustomerupdate', {
+
+                method: 'post',
+                headers: API_HEADERS,
+                body: JSON.stringify(newMaster)
+            });
+
+            this.setState({
+
+                show: false
+            });
+
+            console.log(event.target.telefono.value);
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+            var _this66 = this;
+
+            return React.createElement(
+                'div',
+                null,
+                React.createElement(
+                    Table,
+                    { striped: true, bordered: true, condensed: true, hover: true },
+                    React.createElement(
+                        'thead',
+                        null,
+                        React.createElement(
+                            'tr',
+                            null,
+                            React.createElement(
+                                'th',
+                                null,
+                                '\xA0'
+                            ),
+                            React.createElement(
+                                'th',
+                                null,
+                                'Nombre'
+                            ),
+                            React.createElement(
+                                'th',
+                                null,
+                                'Apellido'
+                            ),
+                            React.createElement(
+                                'th',
+                                null,
+                                'Telefono'
+                            ),
+                            React.createElement(
+                                'th',
+                                null,
+                                'Actions'
+                            )
+                        )
+                    ),
+                    React.createElement(
+                        'tbody',
+                        null,
+                        this.state.masterAPI.map(function (master) {
+                            return React.createElement(
+                                'tr',
+                                null,
+                                React.createElement(
+                                    'td',
+                                    null,
+                                    master.id
+                                ),
+                                React.createElement(
+                                    'td',
+                                    null,
+                                    master.name
+                                ),
+                                React.createElement(
+                                    'td',
+                                    null,
+                                    'Test'
+                                ),
+                                React.createElement(
+                                    'td',
+                                    null,
+                                    'Test'
+                                ),
+                                React.createElement(
+                                    'td',
+                                    null,
+                                    React.createElement(
+                                        Button,
+                                        { value: master.id, onClick: _this66.onClicked.bind(_this66) },
+                                        'Edit'
+                                    )
+                                )
+                            );
+                        })
+                    )
+                ),
+                React.createElement(
+                    Modal,
+                    { show: this.state.show },
+                    React.createElement(
+                        Modal.Header,
+                        { closeButton: true },
+                        React.createElement(
+                            Modal.Title,
+                            null,
+                            'Edit Modal'
+                        )
+                    ),
+                    React.createElement(
+                        Modal.Body,
+                        null,
+                        React.createElement(
+                            Form,
+                            { onSubmit: this.onSubmit.bind(this) },
+                            React.createElement(
+                                Row,
+                                null,
+                                React.createElement(
+                                    FormGroup,
+                                    { controlId: 'formHorizontalName' },
+                                    React.createElement(
+                                        Col,
+                                        { componentClass: ControlLabel, md: 2, sm: 3 },
+                                        'ID'
+                                    ),
+                                    React.createElement(
+                                        Col,
+                                        { md: 8, sm: 9 },
+                                        React.createElement(FormControl, { type: 'text', name: 'ID', placeholder: 'ID', value: this.state.id, disabled: true })
+                                    )
+                                )
+                            ),
+                            React.createElement('br', null),
+                            React.createElement(
+                                Row,
+                                null,
+                                React.createElement(
+                                    FormGroup,
+                                    { controlId: 'formHorizontalName' },
+                                    React.createElement(
+                                        Col,
+                                        { componentClass: ControlLabel, md: 2, sm: 3 },
+                                        'Name'
+                                    ),
+                                    React.createElement(
+                                        Col,
+                                        { md: 8, sm: 9 },
+                                        React.createElement(FormControl, { type: 'text', name: 'firstname', placeholder: 'Name', disabled: true })
+                                    )
+                                )
+                            ),
+                            React.createElement('br', null),
+                            React.createElement(
+                                Row,
+                                null,
+                                React.createElement(
+                                    FormGroup,
+                                    { controlId: 'formHorizontalName' },
+                                    React.createElement(
+                                        Col,
+                                        { componentClass: ControlLabel, md: 2, sm: 3 },
+                                        'Last Name'
+                                    ),
+                                    React.createElement(
+                                        Col,
+                                        { md: 8, sm: 9 },
+                                        React.createElement(FormControl, { type: 'text', name: 'firstname', placeholder: 'Last Name', disabled: true })
+                                    )
+                                )
+                            ),
+                            React.createElement('br', null),
+                            React.createElement(
+                                Row,
+                                null,
+                                React.createElement(
+                                    FormGroup,
+                                    { controlId: 'formHorizontalName' },
+                                    React.createElement(
+                                        Col,
+                                        { componentClass: ControlLabel, md: 2, sm: 3 },
+                                        'Telefono'
+                                    ),
+                                    React.createElement(
+                                        Col,
+                                        { md: 8, sm: 9 },
+                                        React.createElement(FormControl, { type: 'text', name: 'telefono', placeholder: 'Telefono', required: true })
+                                    )
+                                )
+                            ),
+                            React.createElement(
+                                Row,
+                                null,
+                                React.createElement(
+                                    Button,
+                                    { className: 'pull-right', type: 'submit' },
+                                    'Save'
+                                )
+                            )
+                        )
+                    ),
+                    React.createElement(
+                        Modal.Footer,
+                        null,
+                        React.createElement(
+                            Button,
+                            null,
+                            'Save'
+                        )
+                    )
+                )
+            );
+        }
+    }]);
+
+    return CustomerTable;
+}(React.Component);
+
 ReactDOM.render(React.createElement(
     Router,
     { history: browserHistory },
     React.createElement(
         Route,
         { path: '/', component: App },
+        React.createElement(Route, { path: 'customer', component: Customer }),
         React.createElement(Route, { path: 'account', component: Account }),
         React.createElement(Route, { path: 'agregar_tiposervicio', component: AgregarPeluquera }),
         React.createElement(Route, { path: 'tripartials', component: TriPartials }),

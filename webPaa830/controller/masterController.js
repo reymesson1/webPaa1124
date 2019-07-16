@@ -70,9 +70,33 @@ exports.removeMaster = async(req,res)=>{
 }
 
 exports.getMasterPartials = async(req,res)=>{
+    
+    var master = await Master.find({})
+    
+    res.send(master)
+    
+}
 
-  var master = await Master.find({})
+exports.getMasterCustomer = async(req,res)=>{
 
-  res.send(master)
+    var master = await Master.findOne(
+        
+        {   "id": req.body.id},
 
+        function(err,masterOne){
+
+            if(!err){
+
+                masterOne.telefono = req.body.telefono
+
+                masterOne.save(function(err,user){
+                    console.log('Customer Updated', user)
+                })
+
+            }
+
+
+        }
+    )
+    
 }
