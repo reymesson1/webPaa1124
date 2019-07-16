@@ -22,7 +22,8 @@ var userSchema = new mongoose.Schema({
     item: Array,
     comments: Array,
     payment: String,
-    telefono: String
+    telefono: String,
+    email: String
 })
 
 module.exports = mongoose.model('Master', userSchema)

@@ -87,7 +87,7 @@ exports.getMasterCustomer = async(req,res)=>{
 
             if(!err){
 
-                masterOne.telefono = req.body.telefono
+                masterOne.email = req.body.email
 
                 masterOne.save(function(err,user){
                     console.log('Customer Updated', user)

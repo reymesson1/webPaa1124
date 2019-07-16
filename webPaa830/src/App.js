@@ -3228,6 +3228,9 @@ class CustomerTable extends React.Component{
         super();
         this.state = {            
             id: 0,
+            name: "",
+            lastname: "",
+            telefono: "",
             masterAPI: [],
             show: false,
             handleClose: true
@@ -3252,11 +3255,27 @@ class CustomerTable extends React.Component{
 
     onClicked(event){
 
-        this.setState({
+        let masterData = this.state.masterAPI.filter(
+            
+            (master) =>  master.id == event.target.value
+        )
 
-            show: true,
-            id: event.target.value
-        })
+        
+        if(masterData){
+            
+            let lastName = masterData[0].name.split(' ')[0]
+            let Name = masterData[0].name.split(' ')[1]
+            let telefono = masterData[0].name.split(' ')[2]
+            
+            this.setState({
+                
+                show: true,
+                id: event.target.value,
+                name: name,
+                lastName: lastName,
+                telefono: telefono
+            })
+        }
 
     }
 
@@ -3272,7 +3291,7 @@ class CustomerTable extends React.Component{
         let newMaster = {
 
             "id": this.state.id,
-            "telefono": event.target.telefono.value
+            "email": event.target.email.value
         }
 
         fetch(API_URL+'/mastercustomerupdate', {
@@ -3287,20 +3306,19 @@ class CustomerTable extends React.Component{
             show: false
         })
 
-        console.log(event.target.telefono.value);
     }
     
     render(){
 
+        
         return(
             <div>
             <Table striped bordered condensed hover>
                 <thead>
                         <tr>
                             <th>&nbsp;</th>                            
-                            <th>Nombre</th>                            
-                            <th>Apellido</th>                            
-                            <th>Telefono</th>                            
+                            <th>Nombre</th>                              
+                            <th>Email</th>                            
                             <th>Actions</th>                            
                         </tr>
                 </thead>
@@ -3310,9 +3328,8 @@ class CustomerTable extends React.Component{
                     (master) => 
                     <tr>
                         <td>{master.id}</td>
-                        <td>{master.name}</td>
-                        <td>{'Test'}</td>                                                
-                        <td>{'Test'}</td>                                                
+                        <td>{master.name}</td>                                                
+                        <td>{master.email}</td>                        
                         <td>
                             <Button value={master.id} onClick={this.onClicked.bind(this)}>Edit</Button>
                         </td>                                                
@@ -3344,7 +3361,7 @@ class CustomerTable extends React.Component{
                                     Name
                                 </Col>
                                 <Col md={8} sm={9}>
-                                    <FormControl type="text" name="firstname" placeholder="Name" disabled />
+                                    <FormControl type="text" name="firstname" placeholder="Name" value={this.state.name} disabled />
                                 </Col>                                
                                 </FormGroup>                                
                             </Row>
@@ -3355,7 +3372,7 @@ class CustomerTable extends React.Component{
                                     Last Name
                                 </Col>
                                 <Col md={8} sm={9}>
-                                    <FormControl type="text" name="firstname" placeholder="Last Name" disabled />
+                                    <FormControl type="text" name="firstname" placeholder="Last Name" value={this.state.lastname} disabled />
                                 </Col>                                
                                 </FormGroup>                                
                             </Row>
@@ -3366,7 +3383,18 @@ class CustomerTable extends React.Component{
                                     Telefono
                                 </Col>
                                 <Col md={8} sm={9}>
-                                    <FormControl type="text" name="telefono" placeholder="Telefono" required />
+                                    <FormControl type="text" name="telefono" placeholder="Telefono" value={this.state.telefono} disabled />
+                                </Col>                                
+                                </FormGroup>                                
+                            </Row>
+                            <br/>
+                            <Row>
+                                <FormGroup controlId="formHorizontalName">
+                                <Col componentClass={ControlLabel} md={2} sm={3}>
+                                    Email
+                                </Col>
+                                <Col md={8} sm={9}>
+                                    <FormControl type="text" name="email" placeholder="Email" required />
                                 </Col>                                
                                 </FormGroup>                                
                             </Row>

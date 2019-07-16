@@ -4917,6 +4917,9 @@ var CustomerTable = function (_React$Component46) {
 
         _this64.state = {
             id: 0,
+            name: "",
+            lastname: "",
+            telefono: "",
             masterAPI: [],
             show: false,
             handleClose: true
@@ -4944,11 +4947,25 @@ var CustomerTable = function (_React$Component46) {
         key: 'onClicked',
         value: function onClicked(event) {
 
-            this.setState({
-
-                show: true,
-                id: event.target.value
+            var masterData = this.state.masterAPI.filter(function (master) {
+                return master.id == event.target.value;
             });
+
+            if (masterData) {
+
+                var lastName = masterData[0].name.split(' ')[0];
+                var Name = masterData[0].name.split(' ')[1];
+                var telefono = masterData[0].name.split(' ')[2];
+
+                this.setState({
+
+                    show: true,
+                    id: event.target.value,
+                    name: name,
+                    lastName: lastName,
+                    telefono: telefono
+                });
+            }
         }
     }, {
         key: 'onSubmit',
@@ -4963,7 +4980,7 @@ var CustomerTable = function (_React$Component46) {
             var newMaster = {
 
                 "id": this.state.id,
-                "telefono": event.target.telefono.value
+                "email": event.target.email.value
             };
 
             fetch(API_URL + '/mastercustomerupdate', {
@@ -4977,8 +4994,6 @@ var CustomerTable = function (_React$Component46) {
 
                 show: false
             });
-
-            console.log(event.target.telefono.value);
         }
     }, {
         key: 'render',
@@ -5010,12 +5025,7 @@ var CustomerTable = function (_React$Component46) {
                             React.createElement(
                                 'th',
                                 null,
-                                'Apellido'
-                            ),
-                            React.createElement(
-                                'th',
-                                null,
-                                'Telefono'
+                                'Email'
                             ),
                             React.createElement(
                                 'th',
@@ -5044,12 +5054,7 @@ var CustomerTable = function (_React$Component46) {
                                 React.createElement(
                                     'td',
                                     null,
-                                    'Test'
-                                ),
-                                React.createElement(
-                                    'td',
-                                    null,
-                                    'Test'
+                                    master.email
                                 ),
                                 React.createElement(
                                     'td',
@@ -5115,7 +5120,7 @@ var CustomerTable = function (_React$Component46) {
                                     React.createElement(
                                         Col,
                                         { md: 8, sm: 9 },
-                                        React.createElement(FormControl, { type: 'text', name: 'firstname', placeholder: 'Name', disabled: true })
+                                        React.createElement(FormControl, { type: 'text', name: 'firstname', placeholder: 'Name', value: this.state.name, disabled: true })
                                     )
                                 )
                             ),
@@ -5134,7 +5139,7 @@ var CustomerTable = function (_React$Component46) {
                                     React.createElement(
                                         Col,
                                         { md: 8, sm: 9 },
-                                        React.createElement(FormControl, { type: 'text', name: 'firstname', placeholder: 'Last Name', disabled: true })
+                                        React.createElement(FormControl, { type: 'text', name: 'firstname', placeholder: 'Last Name', value: this.state.lastname, disabled: true })
                                     )
                                 )
                             ),
@@ -5153,7 +5158,26 @@ var CustomerTable = function (_React$Component46) {
                                     React.createElement(
                                         Col,
                                         { md: 8, sm: 9 },
-                                        React.createElement(FormControl, { type: 'text', name: 'telefono', placeholder: 'Telefono', required: true })
+                                        React.createElement(FormControl, { type: 'text', name: 'telefono', placeholder: 'Telefono', value: this.state.telefono, disabled: true })
+                                    )
+                                )
+                            ),
+                            React.createElement('br', null),
+                            React.createElement(
+                                Row,
+                                null,
+                                React.createElement(
+                                    FormGroup,
+                                    { controlId: 'formHorizontalName' },
+                                    React.createElement(
+                                        Col,
+                                        { componentClass: ControlLabel, md: 2, sm: 3 },
+                                        'Email'
+                                    ),
+                                    React.createElement(
+                                        Col,
+                                        { md: 8, sm: 9 },
+                                        React.createElement(FormControl, { type: 'text', name: 'email', placeholder: 'Email', required: true })
                                     )
                                 )
                             ),
