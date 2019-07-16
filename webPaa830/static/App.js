@@ -5186,19 +5186,10 @@ var CustomerTable = function (_React$Component46) {
                                 null,
                                 React.createElement(
                                     Button,
-                                    { className: 'pull-right', type: 'submit' },
+                                    { className: 'pull-right', style: { 'margin': '5%' }, type: 'submit' },
                                     'Save'
                                 )
                             )
-                        )
-                    ),
-                    React.createElement(
-                        Modal.Footer,
-                        null,
-                        React.createElement(
-                            Button,
-                            null,
-                            'Save'
                         )
                     )
                 )

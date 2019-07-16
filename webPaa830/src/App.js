@@ -3399,13 +3399,10 @@ class CustomerTable extends React.Component{
                                 </FormGroup>                                
                             </Row>
                             <Row>
-                                <Button className="pull-right" type="submit">Save</Button>                                
+                                <Button className="pull-right" style={{'margin':'5%'}} type="submit">Save</Button>                                
                             </Row>
                         </Form>                    
-                </Modal.Body>
-                <Modal.Footer>
-                    <Button>Save</Button>
-                </Modal.Footer>
+                </Modal.Body>                
             </Modal>
 
             </div>
