@@ -4961,8 +4961,8 @@ var CustomerTable = function (_React$Component46) {
 
                     show: true,
                     id: event.target.value,
-                    name: name,
-                    lastName: lastName,
+                    name: Name,
+                    lastname: lastName,
                     telefono: telefono
                 });
             }
@@ -5025,6 +5025,16 @@ var CustomerTable = function (_React$Component46) {
                             React.createElement(
                                 'th',
                                 null,
+                                'Apellido'
+                            ),
+                            React.createElement(
+                                'th',
+                                null,
+                                'Telefono'
+                            ),
+                            React.createElement(
+                                'th',
+                                null,
                                 'Email'
                             ),
                             React.createElement(
@@ -5049,7 +5059,17 @@ var CustomerTable = function (_React$Component46) {
                                 React.createElement(
                                     'td',
                                     null,
-                                    master.name
+                                    master.name.split(' ')[1]
+                                ),
+                                React.createElement(
+                                    'td',
+                                    null,
+                                    master.name.split(' ')[0]
+                                ),
+                                React.createElement(
+                                    'td',
+                                    null,
+                                    master.name.split(' ')[2]
                                 ),
                                 React.createElement(
                                     'td',

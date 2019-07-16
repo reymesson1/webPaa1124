@@ -3271,8 +3271,8 @@ class CustomerTable extends React.Component{
                 
                 show: true,
                 id: event.target.value,
-                name: name,
-                lastName: lastName,
+                name: Name,
+                lastname: lastName,
                 telefono: telefono
             })
         }
@@ -3318,6 +3318,8 @@ class CustomerTable extends React.Component{
                         <tr>
                             <th>&nbsp;</th>                            
                             <th>Nombre</th>                              
+                            <th>Apellido</th>                              
+                            <th>Telefono</th>                              
                             <th>Email</th>                            
                             <th>Actions</th>                            
                         </tr>
@@ -3328,7 +3330,9 @@ class CustomerTable extends React.Component{
                     (master) => 
                     <tr>
                         <td>{master.id}</td>
-                        <td>{master.name}</td>                                                
+                        <td>{master.name.split(' ')[1]}</td>                                                
+                        <td>{master.name.split(' ')[0]}</td>                                                
+                        <td>{master.name.split(' ')[2]}</td>                                                
                         <td>{master.email}</td>                        
                         <td>
                             <Button value={master.id} onClick={this.onClicked.bind(this)}>Edit</Button>
