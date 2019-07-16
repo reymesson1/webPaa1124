@@ -3394,7 +3394,7 @@ class CustomerTable extends React.Component{
                                     Email
                                 </Col>
                                 <Col md={8} sm={9}>
-                                    <FormControl type="text" name="email" placeholder="Email" required />
+                                    <FormControl type="email" name="email" placeholder="Email" required />
                                 </Col>                                
                                 </FormGroup>                                
                             </Row>

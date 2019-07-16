@@ -5177,7 +5177,7 @@ var CustomerTable = function (_React$Component46) {
                                     React.createElement(
                                         Col,
                                         { md: 8, sm: 9 },
-                                        React.createElement(FormControl, { type: 'text', name: 'email', placeholder: 'Email', required: true })
+                                        React.createElement(FormControl, { type: 'email', name: 'email', placeholder: 'Email', required: true })
                                     )
                                 )
                             ),
