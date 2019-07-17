@@ -10,6 +10,7 @@ app.use(bodyParser.json());
 var cookies = false;
 var User = require('./models/user.js');
 var masterController = require('./controller/masterController');
+var Wallet = require('./models/wallet.js');
 
 app.get('/cookies', function(req,res){
 
@@ -186,7 +187,65 @@ app.post('/resetpassword', async (req, res)=>{
 
 app.post('/mastercustomerupdate', masterController.getMasterCustomer)
 
-  
+app.post('/loginandroid', async(req,res)=>{
+
+    console.log(req.body.nameValuePairs)
+
+    let logged = false;
+
+    if(req.body.nameValuePairs.name=="reymesson@gmail.com"&&req.body.nameValuePairs.password=="1234567"){
+        logged = true
+    }
+
+    res.send(logged)
+})
+
+app.get('/wallet', async(req,res)=>{
+
+	var wallet = await Wallet.find({})
+
+	res.send(wallet)
+
+})
+
+app.post('/addwalletandroid', async(req,res)=>{ 
+
+	var wallet = new Wallet(req.body.nameValuePairs); 
+	wallet.save(function(err){ 
+
+		if(!err){ 
+			console.log('Wallet saved');
+		 }
+	 })
+	 console.log(req.body.nameValuePairs)
+	 res.send(req.body)
+})
+
+app.post('/removewalletandroid', async(req,res)=>{
+	 
+	 var wallet = await Wallet.remove({"id":req.body.nameValuePairs.id},function(err,wallet){
+	
+	 	if(!err){
+			 console.log("Wallet removed ");
+		}	
+	})
+ 	res.send('removed');
+})
+
+app.post('/editwalletandroid', async(req,res)=>{ 
+
+    console.log(req.body.nameValuePairs); 
+    var wallet = await Wallet.findOne({"id":req.body.nameValuePairs.id},function(err,wallet){ 
+
+        if(!err){ 
+            wallet.name = req.body.nameValuePairs.name; 
+            wallet.amount = req.body.nameValuePairs.amount; 
+            wallet.save(function(err,d){ 
+                console.log('Wallet updated');
+                })
+            } 
+    }) 
+}) 
 
 mongoose.connect('mongodb://localhost:27017/supreme',(err)=>{
     if(!err){

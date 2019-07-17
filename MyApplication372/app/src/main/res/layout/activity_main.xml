@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".MainActivity"
+        android:orientation="horizontal"
+        android:background="#00CB77">
+    <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+    >
+          <!--left-->
+    </LinearLayout>
+    <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="9"
+            android:orientation="vertical"
+    >
+         <!--center-->
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="2"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="2"
+
+        >
+            <TextView
+                    android:gravity="center"
+                    android:text="LOGIN"
+                    android:textSize="36dp"
+                    android:textColor="#ffffff"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+
+        </LinearLayout>
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="4"
+                android:orientation="vertical"
+        >
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+            >
+
+                <EditText
+                        android:id="@+id/editTXT"
+                        android:lineHeight="0dp"
+                        android:hint="Email"
+                        android:textColorHint="#ffffff"
+                        android:layout_width="match_parent"
+                        android:layout_height="70dp"/>
+
+            </LinearLayout>
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+            >
+
+                <EditText
+                        android:id="@+id/editTXT2"
+                        android:hint="Password"
+                        android:inputType="textPassword"
+                        android:textColorHint="#ffffff"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"/>
+
+            </LinearLayout>
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:orientation="horizontal"
+            >
+                <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="5"
+                >
+                    <CheckBox
+                            android:text="Show Password"
+                            android:textColor="#ffffff"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"/>
+
+                </LinearLayout>
+                <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="5"
+                >
+                    <TextView
+                            android:gravity="center"
+                            android:text="Forgot the Password?"
+                            android:textColor="#ffffff"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+        >
+            <Button
+                    android:id="@+id/btn_login"
+                    android:text="LOGIN"
+                    android:textColor="#00CB77"
+                    android:textFontWeight="Bold"
+                    android:textSize="20dp"
+                    android:background="#ffffff"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+        </LinearLayout>
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+        >
+            <TextView
+                    android:gravity="center"
+                    android:textColor="#ffffff"
+                    android:text="Not a member yet? Sign Up here."
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+        </LinearLayout>
+
+    </LinearLayout>
+    <!--end center-->
+    <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:gravity="center"
+            android:orientation="vertical"
+    >
+        <!--right-->
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center"
+        >
+            <TextView
+                    android:id="@+id/btn_close"
+                    android:background="@drawable/ic_equis"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"/>
+        </LinearLayout>
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="8"
+        />
+        </LinearLayout>
+</LinearLayout>
