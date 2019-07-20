@@ -51,7 +51,7 @@ exports.removeMaster = async(req,res)=>{
 
   var token = jwt.decode(req.body.token, '123')
 
-  if(token.sub == "5d3347b1be60231d5466adee"){//username:supreme
+  if(token.sub == "5d334c3682ba7d32e408c661"){//username:supreme
 
     var master = await Master.findOne({"id":req.body.id},function(err,m){
     
