@@ -153,8 +153,8 @@ class App extends React.Component{
     let login = (
 
           <div>
-            {/* <Login */}
-            <Registration
+            {/* <Registration */}
+            <Login
                     setcookie={this.setCookie}
                     setregistration={this.setRegistration}
 

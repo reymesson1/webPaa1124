@@ -168,7 +168,7 @@ var App = function (_React$Component) {
             var login = React.createElement(
                 'div',
                 null,
-                React.createElement(Registration, {
+                React.createElement(Login, {
                     setcookie: this.setCookie,
                     setregistration: this.setRegistration
 
