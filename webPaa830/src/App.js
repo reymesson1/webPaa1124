@@ -781,7 +781,7 @@ class Master extends React.Component{
 
               method: 'post',
               headers: API_HEADERS,
-              body: JSON.stringify({"id":index, token:token()})
+              body: JSON.stringify({"id":value, token:token()})
         })
     }
 

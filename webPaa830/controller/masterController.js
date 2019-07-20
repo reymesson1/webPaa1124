@@ -47,23 +47,24 @@ exports.removeMaster = async(req,res)=>{
 
   var userData = req.body.token;
 
+  console.log(req.body);
+
   var token = jwt.decode(req.body.token, '123')
 
-  if(token.sub == "5d091ad3c382341e4c088c72"){//username:supreme
+  // if(token.sub == "5d091ad3c382341e4c088c72"){//username:supreme
 
     var master = await Master.findOne({"id":req.body.id},function(err,m){
     
           if(!err){
               
-              m.status="removed"
-              m.save(function(err, s){
+              m.remove(function(err, s){
                   console.log('Removed Updated');
               })
           }
       })
     
 
-  }
+  // }
   
   res.send(req.body);
 
