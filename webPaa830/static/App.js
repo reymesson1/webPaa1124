@@ -56,6 +56,8 @@ var TOKEN_KEY = "token";
 
 var languageActive = false;
 
+var global = 0;
+
 function token() {
 
     return localStorage.getItem(TOKEN_KEY);
@@ -1523,6 +1525,11 @@ var MasterTable = function (_React$Component14) {
                 React.createElement(
                     'th',
                     null,
+                    '\xA0'
+                ),
+                React.createElement(
+                    'th',
+                    null,
                     '#'
                 ),
                 React.createElement(
@@ -1631,12 +1638,23 @@ var MasterTableBody = function (_React$Component15) {
             console.log('clicked!');
         }
     }, {
+        key: 'onClicked',
+        value: function onClicked(event) {
+
+            global = event.target.value;
+        }
+    }, {
         key: 'render',
         value: function render() {
 
             return React.createElement(
                 'tr',
                 null,
+                React.createElement(
+                    'td',
+                    null,
+                    React.createElement('input', { type: 'radio', name: 'radioCust', value: this.props.name, onClick: this.onClicked.bind(this) })
+                ),
                 React.createElement(
                     'td',
                     null,
@@ -2133,13 +2151,24 @@ var MasterModalField = function (_React$Component18) {
                 )
             );
 
+            var customerDisplay = React.createElement(FormControl, { type: 'text', name: 'firstname', placeholder: 'Cliente', required: true });
+
+            var customerDisplayGlobal = React.createElement(FormControl, { type: 'text', name: 'firstname', placeholder: 'Cliente', value: global, required: true });
+
+            var customerDisplayActive = void 0;
+
+            if (global == 0) {
+                customerDisplayActive = customerDisplay;
+            } else {
+                customerDisplayActive = customerDisplayGlobal;
+            }
+
             var MasterModalFieldES = React.createElement(
                 Row,
                 null,
                 React.createElement(
                     Form,
-                    {
-                        onSubmit: this.props.masterCallback.onsavedetail.bind(this) },
+                    { onSubmit: this.props.masterCallback.onsavedetail.bind(this) },
                     React.createElement(
                         Row,
                         null,
@@ -2154,8 +2183,7 @@ var MasterModalField = function (_React$Component18) {
                             React.createElement(
                                 Col,
                                 { md: 4, sm: 6 },
-                                React.createElement(FormControl, { type: 'text',
-                                    name: 'firstname', placeholder: 'Cliente', required: true })
+                                customerDisplayActive
                             )
                         )
                     ),
@@ -2168,23 +2196,14 @@ var MasterModalField = function (_React$Component18) {
                             { controlId: 'formHorizontalItem' },
                             React.createElement(
                                 Col,
-                                { componentClass: ControlLabel,
-                                    md: 1, sm: 2 },
+                                { componentClass: ControlLabel, md: 1, sm: 2 },
                                 'Articulo'
                             ),
                             React.createElement(
                                 Col,
                                 { md: 4, sm: 6 },
                                 React.createElement(Autosuggest, {
-                                    suggestions: suggestions,
-
-                                    onSuggestionsFetchRequested: this.onSuggestionsFetchRequested.bind(this),
-
-                                    onSuggestionsClearRequested: this.onSuggestionsClearRequested.bind(this),
-
-                                    renderSuggestion: renderSuggestion,
-
-                                    getSuggestionValue: getSuggestionValue,
+                                    suggestions: suggestions, onSuggestionsFetchRequested: this.onSuggestionsFetchRequested.bind(this), onSuggestionsClearRequested: this.onSuggestionsClearRequested.bind(this), renderSuggestion: renderSuggestion, getSuggestionValue: getSuggestionValue,
                                     inputProps: inputProps
                                 })
                             )
