@@ -138,6 +138,22 @@ module.exports = function(){
 
         }
 
+	function getWeeklyReportRecapFour(detail,callback){
+
+                var MongoClient = require('mongodb').MongoClient;
+                var url = "mongodb://localhost:27017/supreme";
+                MongoClient.connect(url, function(err, db) {
+                    if (err) throw err;
+                      //db.collection("master").aggregate([{"$match":{"date":{"$gte":"2018-06-15","$lte":"2018-06-31"}}},{"$group":{"_id":"$item.development","total":{"$sum":"$project"}}},{"$sort":{"_id":1}}]).toArray(function(err,result){
+               db.collection("masters").aggregate([{"$match":{"date":{"$gte":"2019-06-15","$lte":"2019-09-31"}}},{"$unwind":"$item"},{"$group":{"_id":"$item.firstname","total":{"$sum":"$project"}}},{"$sort":{"total":-1}}]).toArray(function(err,result){      
+   
+			callback(result); 
+                })
+                db.close();
+                });
+
+        }
+
 	function getWeeklyReportbyDevelopment(master,callback){
 
 		 var MongoClient = require('mongodb').MongoClient;
@@ -240,6 +256,7 @@ module.exports = function(){
 		removeDetail: removeDetail,
 		getWeeklyReport: getWeeklyReport,
 		getWeeklyReportRecap: getWeeklyReportRecap,
+		getWeeklyReportRecapFour: getWeeklyReportRecapFour,
 		getWeeklyReportbyDevelopment:getWeeklyReportbyDevelopment
 	}
 

@@ -87,6 +87,14 @@ app.get('/weeklyreportrecap',function(req,res){
 
 })
 
+app.get('/weeklyreportrecapfour',function(req,res){
+
+    dba.getWeeklyReportRecapFour({}, function(data){
+            res.send(data);
+    });
+
+})
+
 app.get('/weeklyreportbydev',function(req,res){
 
 	dba.getWeeklyReportbyDevelopment({},function(data){

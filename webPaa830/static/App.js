@@ -809,6 +809,15 @@ var Toolbar = function (_React$Component8) {
                         ),
                         React.createElement(
                             MenuItem,
+                            { eventKey: 3.2 },
+                            React.createElement(
+                                Link,
+                                { to: '/fourpartials' },
+                                'Resume Cuadre por Clientes'
+                            )
+                        ),
+                        React.createElement(
+                            MenuItem,
                             { eventKey: 3.3 },
                             React.createElement(
                                 Link,
@@ -4752,12 +4761,189 @@ var Account = function (_React$Component44) {
     return Account;
 }(React.Component);
 
+var FourPartials = function (_React$Component45) {
+    _inherits(FourPartials, _React$Component45);
+
+    function FourPartials() {
+        _classCallCheck(this, FourPartials);
+
+        var _this63 = _possibleConstructorReturn(this, (FourPartials.__proto__ || Object.getPrototypeOf(FourPartials)).call(this));
+
+        _this63.state = {
+
+            masterAPI: []
+        };
+        return _this63;
+    }
+
+    _createClass(FourPartials, [{
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            var _this64 = this;
+
+            fetch(API_URL + '/weeklyreportrecapfour', { headers: API_HEADERS }).then(function (response) {
+                return response.json();
+            }).then(function (responseData) {
+                _this64.setState({
+
+                    masterAPI: responseData
+                });
+            }).catch(function (error) {
+                console.log('Error fetching and parsing data', error);
+            });
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+
+            return React.createElement(FourPartialsTable, {
+                masterAPI: this.state.masterAPI
+            });
+        }
+    }]);
+
+    return FourPartials;
+}(React.Component);
+
+var FourPartialsTable = function (_React$Component46) {
+    _inherits(FourPartialsTable, _React$Component46);
+
+    function FourPartialsTable() {
+        _classCallCheck(this, FourPartialsTable);
+
+        return _possibleConstructorReturn(this, (FourPartialsTable.__proto__ || Object.getPrototypeOf(FourPartialsTable)).apply(this, arguments));
+    }
+
+    _createClass(FourPartialsTable, [{
+        key: 'render',
+        value: function render() {
+
+            return React.createElement(
+                Table,
+                { striped: true, bordered: true, condensed: true, hover: true },
+                React.createElement(
+                    'thead',
+                    null,
+                    React.createElement(
+                        'tr',
+                        null,
+                        React.createElement(
+                            'th',
+                            null,
+                            '#'
+                        ),
+                        React.createElement(
+                            'th',
+                            null,
+                            'Nombre'
+                        ),
+                        React.createElement(
+                            'th',
+                            null,
+                            'Total'
+                        ),
+                        React.createElement(
+                            'th',
+                            null,
+                            'Porcentaje'
+                        ),
+                        React.createElement(
+                            'th',
+                            null,
+                            'Total + Porcentaje'
+                        )
+                    )
+                ),
+                React.createElement(
+                    'tbody',
+                    null,
+                    this.props.masterAPI.map(function (master, index) {
+                        return React.createElement(FourPartialsTableBody, {
+                            master: master._id,
+                            total: master.total
+                        });
+                    })
+                )
+            );
+        }
+    }]);
+
+    return FourPartialsTable;
+}(React.Component);
+
+var FourPartialsTableBody = function (_React$Component47) {
+    _inherits(FourPartialsTableBody, _React$Component47);
+
+    function FourPartialsTableBody() {
+        _classCallCheck(this, FourPartialsTableBody);
+
+        var _this66 = _possibleConstructorReturn(this, (FourPartialsTableBody.__proto__ || Object.getPrototypeOf(FourPartialsTableBody)).call(this));
+
+        _this66.state = {
+            percentage: 1
+        };
+        return _this66;
+    }
+
+    _createClass(FourPartialsTableBody, [{
+        key: 'onChanged',
+        value: function onChanged(data) {
+            this.setState({
+                percentage: data.target.value
+            });
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+
+            var percentageTotal = this.props.total * this.state.percentage / 100;
+
+            return React.createElement(
+                'tr',
+                null,
+                React.createElement(
+                    'td',
+                    null,
+                    '\xA0'
+                ),
+                React.createElement(
+                    'td',
+                    null,
+                    this.props.master
+                ),
+                React.createElement(
+                    'td',
+                    null,
+                    this.props.total.toFixed(2)
+                ),
+                React.createElement(
+                    'td',
+                    null,
+                    React.createElement('input', { type: 'number', name: 'percentage', placeholder: '%', onChange: this.onChanged.bind(this) })
+                ),
+                React.createElement(
+                    'td',
+                    null,
+                    React.createElement(
+                        'h6',
+                        null,
+                        percentageTotal.toFixed(2)
+                    )
+                )
+            );
+        }
+    }]);
+
+    return FourPartialsTableBody;
+}(React.Component);
+
 ReactDOM.render(React.createElement(
     Router,
     { history: browserHistory },
     React.createElement(
         Route,
         { path: '/', component: App },
+        React.createElement(Route, { path: 'fourpartials', component: FourPartials }),
         React.createElement(Route, { path: 'account', component: Account }),
         React.createElement(Route, { path: 'agregar_tiposervicio', component: AgregarPeluquera }),
         React.createElement(Route, { path: 'tripartials', component: TriPartials }),

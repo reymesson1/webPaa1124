@@ -518,6 +518,7 @@ class Toolbar extends React.Component{
                       <NavDropdown eventKey={3} title="Reportes" id="basic-nav-dropdown">
                             <MenuItem eventKey={3.1}><Link to="/partials">Cuadre</Link></MenuItem>
                             <MenuItem eventKey={3.2}><Link to="/bipartials">Resume Cuadre por Tipo de Servicio</Link></MenuItem>
+                            <MenuItem eventKey={3.2}><Link to="/fourpartials">Resume Cuadre por Clientes</Link></MenuItem>
                             <MenuItem eventKey={3.3}><Link to="/tripartials">Resumen Cuadre General</Link></MenuItem>
                             <MenuItem divider />
                             <MenuItem eventKey={3.4}><Link to="/agregar_tiposervicio">Agregar Tipo de Servicio</Link></MenuItem>
@@ -3148,10 +3149,115 @@ class Account extends React.Component{
     }
 }
 
+class FourPartials extends React.Component{
+
+    constructor(){
+        
+        super();
+        this.state = {
+            
+            masterAPI: []
+        }
+    }
+    
+    componentDidMount(){
+        
+        fetch(API_URL+'/weeklyreportrecapfour',{headers: API_HEADERS})
+          .then((response)=>response.json())
+          .then((responseData)=>{
+              this.setState({
+
+                  masterAPI: responseData
+              })
+          })
+          .catch((error)=>{
+              console.log('Error fetching and parsing data', error);
+        })
+    }
+    
+    render(){
+        
+        return(
+        
+            <FourPartialsTable
+                                masterAPI={this.state.masterAPI}
+            />
+        );
+    }
+}
+
+class FourPartialsTable extends React.Component{
+    
+    render(){
+        
+        return(
+        
+            <Table striped bordered condensed hover>
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Nombre</th>
+                    <th>Total</th>
+                    <th>Porcentaje</th>
+                    <th>Total + Porcentaje</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    {this.props.masterAPI.map(
+                         (master,index) => <FourPartialsTableBody
+                                                        master={master._id}
+                                                        total={master.total}
+                                            />
+                    )}                  
+                </tbody>
+              </Table>
+        );
+    }
+}
+
+class FourPartialsTableBody extends React.Component{
+
+    constructor(){
+        super();
+        this.state = {
+            percentage: 1
+        }
+    }
+
+    onChanged(data){
+        this.setState({
+            percentage: data.target.value
+        })
+    }
+
+    render(){
+
+        let percentageTotal = this.props.total * this.state.percentage / 100;
+
+        return(
+
+            <tr>
+                <td>&nbsp;</td>
+                <td>{this.props.master}</td>
+                <td>{this.props.total.toFixed(2)}</td>
+                <td>
+                    <input type="number" name="percentage" placeholder="%"  onChange={this.onChanged.bind(this)} />
+                </td>
+                <td>
+                    <h6>{percentageTotal.toFixed(2)}</h6>
+                </td>
+            </tr>
+
+        );
+    }
+}
+
+
 
 ReactDOM.render((
   <Router history={browserHistory}>
     <Route path="/" component={App}>
+        <Route path="fourpartials" component={FourPartials}/>
         <Route path="account" component={Account}/>
         <Route path="agregar_tiposervicio" component={AgregarPeluquera}/>
         <Route path="tripartials" component={TriPartials}/>
