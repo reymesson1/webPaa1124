@@ -20,7 +20,8 @@ var userSchema = new mongoose.Schema({
     ncf: String,
     status: String,
     item: Array,
-    comments: Array
+    comments: Array,
+    user: String
 })
 
 module.exports = mongoose.model('Master', userSchema)

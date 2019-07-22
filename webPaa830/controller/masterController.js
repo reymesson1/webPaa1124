@@ -1,15 +1,29 @@
 var mongoose = require('mongoose');
 var Master = require('../models/master.js');
 var Counter = require('../models/counter.js');
+var User = require('../models/user.js');
 var jwt = require('jwt-simple');
 var moment = require('moment');
 var today = moment(new Date()).format('YYYY-MM-DD');
+var dataTemp 
 
 exports.getMaster = async(req,res)=>{
 
   var master = await Master.find({"status":{$ne:"removed"}})
   
   res.send(master);
+}
+
+setMasterUser = async(master, decode) =>{
+
+  var user = await User.findOne(
+    {"_id":decode.sub},
+    function(err, u){
+
+      dataTemp = u.username      
+    }
+  )
+
 }
 
 exports.setMaster = async(req,res)=>{
@@ -22,15 +36,22 @@ exports.setMaster = async(req,res)=>{
 
     var data = req.body
 
-    data["user"] = decode.sub
+    setMasterUser(master, decode)
 
-    var master = new Master(data);
-    
-    master.save(function(err){
-      if(!err){
-        console.log('Master saved');
-      }
-    })
+    setTimeout(() => {
+
+      data["user"] = dataTemp
+  
+      var master = new Master(data);
+      
+      master.save(function(err){
+        if(!err){
+          console.log('Master saved');
+        }
+      })
+  
+    }, 5000);
+
     
     res.send(req.body);
 }
