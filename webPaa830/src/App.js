@@ -681,7 +681,8 @@ class Master extends React.Component{
             "item": this.state.masterDetail,
             "project": zoom,
             "status":"pending",
-            "payment": ""
+            "payment": "",
+            "user": token()
 
         }
 

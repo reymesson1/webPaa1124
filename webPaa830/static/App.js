@@ -1101,7 +1101,8 @@ var Master = function (_React$Component11) {
                 "item": this.state.masterDetail,
                 "project": zoom,
                 "status": "pending",
-                "payment": ""
+                "payment": "",
+                "user": token()
 
             };
 

@@ -15,6 +15,16 @@ exports.getMaster = async(req,res)=>{
 exports.setMaster = async(req,res)=>{
   
     var master = new Master(req.body);
+
+    var decode = jwt.decode(req.body.user,'123')
+    
+    const ObjectId = mongoose.Types.ObjectId;        
+
+    var data = req.body
+
+    data["user"] = decode.sub
+
+    var master = new Master(data);
     
     master.save(function(err){
       if(!err){
