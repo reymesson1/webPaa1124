@@ -78,8 +78,6 @@ exports.removeMaster = async(req,res)=>{
 
   var userData = req.body.token;
 
-  console.log(req.body);
-
   var token = jwt.decode(req.body.token, '123')
 
   if(token.sub == "5d334c3682ba7d32e408c661"){//username:supreme
@@ -101,6 +99,37 @@ exports.removeMaster = async(req,res)=>{
 
 
 }
+
+exports.removeMasterAndroid = async(req,res)=>{
+  
+    var userData = req.body.token;
+  
+    console.log(req.body);
+  
+    // var token = jwt.decode(req.body.token, '123')
+  
+    // if(token.sub == "5d334c3682ba7d32e408c661"){//username:supreme
+  
+    var master = await Master.findOne(
+      {"id":req.body.nameValuePairs.id},
+      function(err,m){
+    
+          if(!err){
+              
+              m.status = "removed"
+              m.save(function(err, s){
+                  console.log('Removed Updated');
+              })
+          }
+      })
+      
+  
+    // }
+    
+    res.send(req.body);
+  
+  
+  }
 
 exports.getMasterPartials = async(req,res)=>{
 
