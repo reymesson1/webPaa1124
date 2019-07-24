@@ -10,7 +10,6 @@ app.use(bodyParser.json());
 var cookies = false;
 var User = require('./models/user.js');
 var masterController = require('./controller/masterController');
-var userController = require('./controller/userController');
 
 app.get('/cookies', function(req,res){
 
@@ -34,8 +33,6 @@ app.post('/master', masterController.setMaster);
 app.post('/payment', masterController.updateMaster);
 
 app.post('/deletemaster', masterController.removeMaster);
-
-app.post('/deletemasterandroid', masterController.removeMasterAndroid);
 
 app.get('/reporte', masterController.getMasterPartials)
 
@@ -198,8 +195,6 @@ app.post('/resetpassword', async (req, res)=>{
 app.get('/counter', masterController.getMasterCounter);
 
 app.post('/addcounter', masterController.setMasterCounter);  
-
-app.post('/loginandroid', userController.setLogin)
 
 mongoose.connect('mongodb://localhost:27017/supreme',(err)=>{
     if(!err){
