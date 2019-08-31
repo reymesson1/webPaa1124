@@ -700,10 +700,14 @@ class Master extends React.Component{
             counter: nextStateCounter
         });
 
-        this.setState({
-            showModal: false,
-            masterDetail: []
-        });
+        setTimeout(() => {
+            
+            
+            this.setState({
+                showModal: false,
+                masterDetail: []
+            });
+        }, 3000);
 
         fetch(API_URL+'/master', {
 
