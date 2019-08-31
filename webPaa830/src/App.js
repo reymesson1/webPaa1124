@@ -688,11 +688,16 @@ class Master extends React.Component{
 
         let nextState = this.state.masterAPI;
 
+        let nextStateCounter = this.state.counter
+
         nextState.push(newMaster);
+
+        nextStateCounter[0].quantity++;
 
         this.setState({
 
-            masterAPI: nextState
+            masterAPI: nextState,
+            counter: nextStateCounter
         });
 
         this.setState({

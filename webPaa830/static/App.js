@@ -1108,11 +1108,16 @@ var Master = function (_React$Component11) {
 
             var nextState = this.state.masterAPI;
 
+            var nextStateCounter = this.state.counter;
+
             nextState.push(newMaster);
+
+            nextStateCounter[0].quantity++;
 
             this.setState({
 
-                masterAPI: nextState
+                masterAPI: nextState,
+                counter: nextStateCounter
             });
 
             this.setState({
