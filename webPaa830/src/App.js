@@ -612,7 +612,8 @@ class Master extends React.Component{
             activePage: 1,
             masterAPI: [],
             masterDetail: [],
-            counter: []
+            counter: [],
+            saveCheck: true
         };
     }
 
@@ -653,7 +654,8 @@ class Master extends React.Component{
 
     open() {
         this.setState({
-            showModal: true
+            showModal: true,
+            saveCheck: true
         });
     }
 
@@ -661,67 +663,72 @@ class Master extends React.Component{
 
         event.preventDefault();
 
-        let today = moment(new Date()).format('YYYY-MM-DD');
+        if(this.state.saveCheck){
 
-        let details = this.state.masterDetail;
+            let today = moment(new Date()).format('YYYY-MM-DD');
 
-        let name = details[0].firstname;
+            let details = this.state.masterDetail;
 
-        let zoom = 0;
+            let name = details[0].firstname;
 
-        for(var x=0;x<details.length;x++){
-            zoom+=parseInt(details[x].project);
-        }
+            let zoom = 0;
 
-        let newMaster = {
+            for(var x=0;x<details.length;x++){
+                zoom+=parseInt(details[x].project);
+            }
 
-            "id": this.state.counter[0].quantity,
-            "date": today,
-            "name": name,
-            "item": this.state.masterDetail,
-            "project": zoom,
-            "status":"pending",
-            "payment": "",
-            "user": token()
+            let newMaster = {
 
-        }
+                "id": this.state.counter[0].quantity,
+                "date": today,
+                "name": name,
+                "item": this.state.masterDetail,
+                "project": zoom,
+                "status":"pending",
+                "payment": "",
+                "user": token()
 
-        let nextState = this.state.masterAPI;
+            }
 
-        let nextStateCounter = this.state.counter
+            let nextState = this.state.masterAPI;
 
-        nextState.push(newMaster);
+            let nextStateCounter = this.state.counter
 
-        nextStateCounter[0].quantity++;
+            nextState.push(newMaster);
 
-        this.setState({
+            nextStateCounter[0].quantity++;
 
-            masterAPI: nextState,
-            counter: nextStateCounter
-        });
-
-        setTimeout(() => {
-            
-            
             this.setState({
-                showModal: false,
-                masterDetail: []
+
+                masterAPI: nextState,
+                counter: nextStateCounter,
+                saveCheck: false
             });
-        }, 3000);
 
-        fetch(API_URL+'/master', {
+            setTimeout(() => {
+                
+                
+                this.setState({
+                    showModal: false,
+                    masterDetail: []
+                });
+            }, 3000);
 
-              method: 'post',
-              headers: API_HEADERS,
-              body: JSON.stringify(newMaster)
-        })
+            fetch(API_URL+'/master', {
 
-        fetch(API_URL+'/addcounter', {
+                method: 'post',
+                headers: API_HEADERS,
+                body: JSON.stringify(newMaster)
+            })
 
-            method: 'post',
-           headers: API_HEADERS,
-           body: JSON.stringify(newMaster)
-       })
+            fetch(API_URL+'/addcounter', {
+
+                method: 'post',
+                headers: API_HEADERS,
+                body: JSON.stringify(newMaster)
+            })
+
+        }
 
     }
 

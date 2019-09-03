@@ -1027,7 +1027,8 @@ var Master = function (_React$Component11) {
             activePage: 1,
             masterAPI: [],
             masterDetail: [],
-            counter: []
+            counter: [],
+            saveCheck: true
         };
         return _this13;
     }
@@ -1072,7 +1073,8 @@ var Master = function (_React$Component11) {
         key: 'open',
         value: function open() {
             this.setState({
-                showModal: true
+                showModal: true,
+                saveCheck: true
             });
         }
     }, {
@@ -1082,66 +1084,70 @@ var Master = function (_React$Component11) {
 
             event.preventDefault();
 
-            var today = moment(new Date()).format('YYYY-MM-DD');
+            if (this.state.saveCheck) {
 
-            var details = this.state.masterDetail;
+                var today = moment(new Date()).format('YYYY-MM-DD');
 
-            var name = details[0].firstname;
+                var details = this.state.masterDetail;
 
-            var zoom = 0;
+                var name = details[0].firstname;
 
-            for (var x = 0; x < details.length; x++) {
-                zoom += parseInt(details[x].project);
-            }
+                var zoom = 0;
 
-            var newMaster = {
+                for (var x = 0; x < details.length; x++) {
+                    zoom += parseInt(details[x].project);
+                }
 
-                "id": this.state.counter[0].quantity,
-                "date": today,
-                "name": name,
-                "item": this.state.masterDetail,
-                "project": zoom,
-                "status": "pending",
-                "payment": "",
-                "user": token()
+                var newMaster = {
 
-            };
+                    "id": this.state.counter[0].quantity,
+                    "date": today,
+                    "name": name,
+                    "item": this.state.masterDetail,
+                    "project": zoom,
+                    "status": "pending",
+                    "payment": "",
+                    "user": token()
 
-            var nextState = this.state.masterAPI;
+                };
 
-            var nextStateCounter = this.state.counter;
+                var nextState = this.state.masterAPI;
 
-            nextState.push(newMaster);
+                var nextStateCounter = this.state.counter;
 
-            nextStateCounter[0].quantity++;
+                nextState.push(newMaster);
 
-            this.setState({
+                nextStateCounter[0].quantity++;
 
-                masterAPI: nextState,
-                counter: nextStateCounter
-            });
+                this.setState({
 
-            setTimeout(function () {
-
-                _this15.setState({
-                    showModal: false,
-                    masterDetail: []
+                    masterAPI: nextState,
+                    counter: nextStateCounter,
+                    saveCheck: false
                 });
-            }, 3000);
 
-            fetch(API_URL + '/master', {
+                setTimeout(function () {
 
-                method: 'post',
-                headers: API_HEADERS,
-                body: JSON.stringify(newMaster)
-            });
+                    _this15.setState({
+                        showModal: false,
+                        masterDetail: []
+                    });
+                }, 3000);
 
-            fetch(API_URL + '/addcounter', {
+                fetch(API_URL + '/master', {
 
-                method: 'post',
-                headers: API_HEADERS,
-                body: JSON.stringify(newMaster)
-            });
+                    method: 'post',
+                    headers: API_HEADERS,
+                    body: JSON.stringify(newMaster)
+                });
+
+                fetch(API_URL + '/addcounter', {
+
+                    method: 'post',
+                    headers: API_HEADERS,
+                    body: JSON.stringify(newMaster)
+                });
+            }
         }
     }, {
         key: 'onSaveDetail',
