@@ -52,61 +52,7 @@ function token(){
 }
 
 class App extends React.Component{
-
-  constructor(){
-
-      super();
-      this.state = {
-
-          cookies: false
-      }
-  }
-
-  componentDidMount(){
-
-      fetch(API_URL+'/cookies',{headers: API_HEADERS})
-      .then((response)=>response.json())
-      .then((responseData)=>{
-          this.setState({
-
-              cookies: responseData
-          })
-      })
-      .catch((error)=>{
-          console.log('Error fetching and parsing data', error);
-      })
-
-
-
-
-  }
-
-  setCookie(event){
-
-      event.preventDefault();
-
-      let newCookie = {
-
-          "id":"1",
-          "username": event.target.email.value,
-          "password": event.target.password.value
-      }
-
-      fetch(API_URL+'/login', {
-
-        method: 'post',
-        headers: API_HEADERS,
-        body: JSON.stringify(newCookie)
-    }).then(response => response.json()).then(response => {
-        if(response.token!=undefined){
-          localStorage.setItem(TOKEN_KEY, response.token)
-        }
-    }); 
-    
-    window.location.reload();
-
-  }
-
+  
     isAuthenticated(){
 
         return !!localStorage.getItem(TOKEN_KEY);
@@ -154,8 +100,7 @@ class App extends React.Component{
 
           <div>
             {/* <Registration */}
-            <Login
-                    setcookie={this.setCookie}
+            <Login                    
                     setregistration={this.setRegistration}
 
             />

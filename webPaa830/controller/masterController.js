@@ -16,13 +16,15 @@ exports.getMaster = async(req,res)=>{
 
 setMasterUser = async(master, decode) =>{
 
-  var user = await User.findOne(
-    {"_id":decode.sub},
-    function(err, u){
+  console.log(decode.sub)
 
-      dataTemp = u.username      
-    }
-  )
+  // var user = await User.findOne(
+  //   {"_id":decode.sub},
+  //   function(err, u){
+
+  //     dataTemp = u.username      
+  //   }
+  // )
 
 }
 
