@@ -43,8 +43,8 @@ var Autosuggest = Autosuggest;
 
 var moment = moment;
 
-var API_URL = 'http://localhost:8083';
-// const API_URL = 'http://159.203.156.208:8083';
+// const API_URL = 'http://localhost:8083'; 
+var API_URL = 'http://159.203.156.208:8083';
 
 var API_HEADERS = {
 
