@@ -11,6 +11,22 @@ var cookies = false;
 var User = require('./models/user.js');
 var masterController = require('./controller/masterController');
 
+app.get('/cookies', function(req,res){
+
+    res.send(cookies);
+});
+
+app.post('/cookies', function(req,res){
+
+    var newCookie = req.body;
+
+    if(newCookie.username=='mechy'){
+        console.log(req.body);
+        cookies=true;
+    }
+});
+    
+
 app.get('/master', masterController.getMaster)
 
 app.post('/master', masterController.setMaster);
